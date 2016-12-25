@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Reading List</string>
+
+    <string name="action_view_finished">View Finished Books</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Add book screen -->
+    <string name="add_book_title">Title</string>
+    <string name="add_book_author">Author</string>
+    <string name="add_book_page_count">Page count</string>
+    <string name="add_book_page_read">Pages read</string>
+    <string name="add_book_publisher">Publisher</string>
+    <string name="add_book_published">Publish year</string>
+    <string name="add_book_isbn">ISBN</string>
+    <string name="add_book_search_button">Search for book</string>
+    <string name="add_book_manual_button">Or add book manually</string>
+    <string name="add_book_manual_submit_button">Add book</string>
+    <string name="add_book_manual_instructions">All fields except title, author, and page count are optional</string>
+
+    <!-- Book detail screen -->
+    <string name="detail_title_placeholder">Book title</string>
+    <string name="detail_author_placeholder">Author name</string>
+    <string name="detail_published_placeholder">Publisher name, 2000</string>
+    <string name="detail_progress_placeholder">0 / 1000 (started 01/01/2000)</string>
+    <string name="detail_synopsis_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut tristique tortor. Phasellus quis varius libero. Maecenas maximus vel mi quis mollis. Sed nec nulla odio. Donec nec porta erat, a efficitur tortor. Suspendisse a malesuada quam. Pellentesque a pellentesque tellus. Quisque et ex feugiat, efficitur justo non, imperdiet ex. Maecenas ut condimentum erat. </string>
+    <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
+    <string name="detail_update_button">Update pages read</string>
+</resources>
