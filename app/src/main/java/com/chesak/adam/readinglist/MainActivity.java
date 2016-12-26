@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Book selectedBook = bookList.get(position);
                 Intent detailIntent = new Intent(MainActivity.this, BookDetailActivity.class);
+                detailIntent.putExtra("position", position);
                 detailIntent.putExtra("book", selectedBook);
                 startActivity(detailIntent);
             }

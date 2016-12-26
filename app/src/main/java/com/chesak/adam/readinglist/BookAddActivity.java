@@ -17,7 +17,7 @@ public class BookAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_add);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        // Set the action bar details.
+        // Set the action bar details
         setTitle("Add book");
 
         Button manualButton = (Button) findViewById(R.id.add_book_manual_button);

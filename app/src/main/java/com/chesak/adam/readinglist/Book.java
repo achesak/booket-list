@@ -1,6 +1,7 @@
 package com.chesak.adam.readinglist;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -287,6 +288,12 @@ public final class Book implements Serializable {
      */
     public Date getStartedReading() {
         return startedReading;
+    }
+
+
+    public String getStartedReadingFormatted() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(this.getStartedReading());
     }
 
 
