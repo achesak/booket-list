@@ -7,7 +7,14 @@
         android:title="@string/action_view_finished"
         android:orderInCategory="100" />
     <item
+        android:id="@+id/action_view_highest"
+        android:title="@string/action_view_highest"
+        android:orderInCategory="101" />
+    <item android:title="@string/action_view_lowest"
+        android:id="@+id/action_view_lowest"
+        android:orderInCategory="102" />
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="101"
+        android:orderInCategory="103"
         android:title="@string/action_settings" />
 </menu>

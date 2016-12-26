@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.io.IOException;
+
 public class BookAddManualActivity extends AppCompatActivity {
 
     EditText titleText;
@@ -59,8 +61,10 @@ public class BookAddManualActivity extends AppCompatActivity {
                     return;
                 }
 
+                // Add the book
                 Book book = new Book(title, author, pageCount, isbn, publisher, published);
                 MainActivity.bookList.add(book);
+                MainActivity.io.saveData(BookAddManualActivity.this, MainActivity.bookList);
 
                 Intent viewMainIntent = new Intent(context, MainActivity.class);
                 startActivity(viewMainIntent);

@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class Book implements Serializable {
+public final class Book implements Serializable {
 
     private String title;
     private String author;
@@ -17,7 +17,6 @@ public class Book implements Serializable {
     private boolean finishedReading;
     private String imageUrl;
     private String synopsis;
-    private float rating;
     private float userRating;
     private String publishDate;
     private String isbn;
@@ -35,7 +34,6 @@ public class Book implements Serializable {
         this.finishedReading = false;
         this.imageUrl = "";
         this.synopsis = "";
-        this.rating = 0;
         this.userRating = 0;
         this.publishDate = "";
         this.isbn = "";
@@ -226,24 +224,6 @@ public class Book implements Serializable {
      */
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
-    }
-
-
-    /**
-     * Gets the rating
-     * @return rating
-     */
-    public float getRating() {
-        return rating;
-    }
-
-
-    /**
-     * Sets the rating
-     * @param rating rating
-     */
-    public void setRating(float rating) {
-        this.rating = rating;
     }
 
 

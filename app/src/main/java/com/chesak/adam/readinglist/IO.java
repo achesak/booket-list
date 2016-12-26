@@ -2,12 +2,13 @@ package com.chesak.adam.readinglist;
 
 import android.content.Context;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 /**
  * Saves and reads application data.
@@ -16,45 +17,81 @@ import java.util.ArrayList;
  */
 public class IO {
 
-    // File names:
+
     final private static String DATA_FILE_NAME = "book_data";
+    private File filesDir;
+
+
+    /**
+     * Constructor
+     * @param filesDir file directory
+     */
+    public IO(File filesDir) {
+        this.filesDir = filesDir;
+    }
+
+
+    public boolean fileExists() {
+        return new File(filesDir, DATA_FILE_NAME).exists();
+    }
 
 
     /**
      * Reads the data from storage
-     * @param context calling activity class
+     * @param context context
      * @return data
      */
-    public static ArrayList<Book> readData(Context context) {
+    public BookList readData(Context context) {
+        FileInputStream fis = null;
+        ObjectInputStream is = null;
+        BookList defaultList = new BookList();
         try {
-            FileInputStream fis = context.openFileInput(DATA_FILE_NAME);
-            ObjectInputStream is = new ObjectInputStream(fis);
-            ArrayList<Book> data = (ArrayList<Book>) is.readObject();
+            fis = context.openFileInput(DATA_FILE_NAME);
+            is = new ObjectInputStream(fis);
+            BookList data = (BookList) is.readObject();
             is.close();
             fis.close();
             return data;
+        } catch (FileNotFoundException e) {
+            return defaultList;
         } catch (IOException e) {
-            return new ArrayList<>();
+            return defaultList;
         } catch (ClassNotFoundException e) {
-            return new ArrayList<>();
+            return defaultList;
+        } finally {
+            if (fis != null && is != null) {
+                try {
+                    fis.close();
+                    is.close();
+                } catch (Exception e) {
+                    // Nothing done here
+                }
+            }
         }
     }
 
 
     /**
      * Writes the data to storage
-     * @param context calling activity class
+     * @param context context
      * @param data data
      */
-    public static void saveData(Context context, BookList data) {
+    public void saveData(Context context, BookList data) {
+        FileOutputStream fos = null;
+        ObjectOutputStream os = null;
         try {
-            FileOutputStream fos = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
+            fos = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
+            os = new ObjectOutputStream(fos);
             os.writeObject(data);
-            os.close();
-            fos.close();
         } catch (IOException e) {
-            // Nothing to do here for now.
+            // Nothing to do here
+        } finally {
+            try {
+                os.close();
+                fos.close();
+            } catch (IOException e) {
+                //Nothing to do here
+            }
         }
     }
 

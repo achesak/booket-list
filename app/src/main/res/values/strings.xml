@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Reading List</string>
 
-    <string name="action_view_finished">View Finished Books</string>
+    <!-- Main screen menu -->
+    <string name="action_view_finished">Finished books</string>
+    <string name="action_view_highest">Highest rated</string>
+    <string name="action_view_lowest">Lowest rated</string>
     <string name="action_settings">Settings</string>
 
     <!-- Add book screen -->
@@ -25,4 +28,5 @@
     <string name="detail_synopsis_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut tristique tortor. Phasellus quis varius libero. Maecenas maximus vel mi quis mollis. Sed nec nulla odio. Donec nec porta erat, a efficitur tortor. Suspendisse a malesuada quam. Pellentesque a pellentesque tellus. Quisque et ex feugiat, efficitur justo non, imperdiet ex. Maecenas ut condimentum erat. </string>
     <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
     <string name="detail_update_button">Update pages read</string>
+    <string name="detail_remove_button">Remove book</string>
 </resources>

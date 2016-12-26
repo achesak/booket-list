@@ -1,5 +1,6 @@
 package com.chesak.adam.readinglist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,11 +10,11 @@ import java.util.Comparator;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookList {
+public class BookList implements Serializable {
 
 
     // Data list:
-    private static ArrayList<Book> list;
+    private ArrayList<Book> list;
 
 
     /**
@@ -65,7 +66,7 @@ public class BookList {
      * Constructor: default
      */
     public BookList() {
-        list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
 
@@ -74,7 +75,7 @@ public class BookList {
      * @param data data
      */
     public BookList(ArrayList<Book> data) {
-        list = data;
+        this.list = data;
     }
 
 
@@ -103,6 +104,7 @@ public class BookList {
      */
     public void add(Book book) {
         list.add(book);
+        sort();
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +13,13 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.IOException;
+
+/**
+ * Main activity, shows the list of books
+ *
+ * @author Adam Chesak, achesak@yahoo.com
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -29,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Application data:
-   public static BookList bookList = new BookList();
+    public static IO io;
+    public static BookList bookList = new BookList();
 
     // UI elements:
     private ListView listView;
-    final private Context context = this;
 
 
     @Override
@@ -47,11 +55,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         listView = (ListView) findViewById(R.id.list_book);
 
+        if (io == null) {
+            io = new IO(getFilesDir());
+            bookList = io.readData(MainActivity.this);
+        }
+
+        io.saveData(MainActivity.this, bookList);
+
         // Set the action bar details
         setTitle("Current books");
 
         // Display the book list
-        IO.saveData(context, bookList);
         BookListAdapter adapter = new BookListAdapter(this, bookList);
         listView.setAdapter(adapter);
 
@@ -61,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Book selectedBook = bookList.get(position);
-
-                Intent detailIntent = new Intent(context, BookDetailActivity.class);
+                Intent detailIntent = new Intent(MainActivity.this, BookDetailActivity.class);
+                detailIntent.putExtra("book", selectedBook);
                 startActivity(detailIntent);
             }
         });
@@ -72,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addIntent = new Intent(context, BookAddActivity.class);
+                Intent addIntent = new Intent(MainActivity.this, BookAddActivity.class);
                 startActivity(addIntent);
             }
         });
