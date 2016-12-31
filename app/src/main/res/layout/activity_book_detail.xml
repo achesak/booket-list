@@ -66,6 +66,14 @@
                 android:layout_marginTop="10dp" />
 
             <TextView
+                android:text="@string/detail_started_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_started"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+                android:textAlignment="center" />
+
+            <TextView
                 android:text="@string/detail_synopsis_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

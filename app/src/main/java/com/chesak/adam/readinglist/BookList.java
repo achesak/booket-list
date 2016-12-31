@@ -15,6 +15,7 @@ public class BookList implements Serializable {
 
     // Data list:
     private ArrayList<Book> list;
+    private ArrayList<Book> finishedList;
 
 
     /**
@@ -67,6 +68,7 @@ public class BookList implements Serializable {
      */
     public BookList() {
         this.list = new ArrayList<>();
+        this.finishedList = new ArrayList<>();
     }
 
 
@@ -76,6 +78,7 @@ public class BookList implements Serializable {
      */
     public BookList(ArrayList<Book> data) {
         this.list = data;
+        this.finishedList = new ArrayList<>();
     }
 
 
@@ -85,6 +88,15 @@ public class BookList implements Serializable {
      */
     public ArrayList<Book> getData() {
         return list;
+    }
+
+
+    /**
+     * Gets the entire finished list
+     * @return data
+     */
+    public ArrayList<Book> getFinishedData() {
+        return finishedList;
     }
 
 
@@ -109,11 +121,69 @@ public class BookList implements Serializable {
 
 
     /**
+     * Removes a book from the list
+     * @param index index
+     * @return removed book
+     */
+    public Book remove(int index) {
+        return list.remove(index);
+    }
+
+
+    /**
      * Gets the size of the list
      * @return size
      */
     public int size() {
         return list.size();
+    }
+
+
+    /**
+     * Gets book at index
+     * @param index index
+     * @return book
+     */
+    public Book getFinished(int index) {
+        return finishedList.get(index);
+    }
+
+
+    /**
+     * Adds a book to the list
+     * @param book book
+     */
+    public void addFinished(Book book) {
+        finishedList.add(book);
+        sortFinished();
+    }
+
+
+    /**
+     * Removes a book from the list
+     * @param index index
+     * @return removed book
+     */
+    public Book removeFinished(int index) {
+        return finishedList.remove(index);
+    }
+
+
+    /**
+     * Gets the size of the finished list
+     * @return size
+     */
+    public int sizeFinished() {
+        return finishedList.size();
+    }
+
+
+    /**
+     * Moves a book to the finished list
+     * @param index index in list
+     */
+    public void move(int index) {
+        finishedList.add(list.remove(index));
     }
 
 
@@ -126,12 +196,40 @@ public class BookList implements Serializable {
 
 
     /**
+     * Sorts the finished list by date added
+     */
+    public void sortFinished() {
+        Collections.sort(finishedList, new DateAddedComparator());
+    }
+
+
+    /**
+     * Gets the 10 highest rated books
+     * @return list of books
+     */
+    public ArrayList<Book> getHighestRated() {
+        return getHighestRated(10);
+    }
+
+
+    /**
+     * Gets the 10 lowest rated books
+     * @return list of books
+     */
+    public ArrayList<Book> getLowestRated() {
+        return getLowestRated(10);
+    }
+
+
+    /**
      * Gets the highest rated books
      * @param count number of books to get
      * @return list of books
      */
     public ArrayList<Book> getHighestRated(int count) {
-        ArrayList<Book> copy = (ArrayList<Book>) list.clone();
+        ArrayList<Book> copy = new ArrayList<>();
+        copy.addAll(list);
+        copy.addAll(finishedList);
         Collections.sort(copy, new HighestRatingComparator());
         if (count > copy.size()) {
             count = copy.size();
@@ -146,7 +244,9 @@ public class BookList implements Serializable {
      * @return list of books
      */
     public ArrayList<Book> getLowestRated(int count) {
-        ArrayList<Book> copy = (ArrayList<Book>) list.clone();
+        ArrayList<Book> copy = new ArrayList<>();
+        copy.addAll(list);
+        copy.addAll(finishedList);
         Collections.sort(copy, new LowestRatingComparator());
         if (count > copy.size()) {
             count = copy.size();

@@ -64,7 +64,7 @@ public class BookAddManualActivity extends AppCompatActivity {
                 // Add the book
                 Book book = new Book(title, author, pageCount, isbn, publisher, published);
                 MainActivity.bookList.add(book);
-                MainActivity.io.saveData(BookAddManualActivity.this, MainActivity.bookList);
+                MainActivity.io.saveData(BookAddManualActivity.this);
 
                 Intent viewMainIntent = new Intent(context, MainActivity.class);
                 startActivity(viewMainIntent);

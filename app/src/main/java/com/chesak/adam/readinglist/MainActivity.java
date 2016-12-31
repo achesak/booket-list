@@ -1,10 +1,8 @@
 package com.chesak.adam.readinglist;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,8 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import java.io.IOException;
 
 /**
  * Main activity, shows the list of books
@@ -42,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     // UI elements:
     private ListView listView;
+    private BookListAdapter adapter;
 
 
     @Override
@@ -60,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
             bookList = io.readData(MainActivity.this);
         }
 
-        io.saveData(MainActivity.this, bookList);
+        io.saveData(MainActivity.this);
 
         // Set the action bar details
         setTitle("Current books");
 
         // Display the book list
-        BookListAdapter adapter = new BookListAdapter(this, bookList);
+        adapter = new BookListAdapter(this, bookList);
         listView.setAdapter(adapter);
 
         // Show book details on click
@@ -93,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_view_finished) {
+
         }
 
         return super.onOptionsItemSelected(item);

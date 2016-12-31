@@ -74,15 +74,14 @@ public class IO {
     /**
      * Writes the data to storage
      * @param context context
-     * @param data data
      */
-    public void saveData(Context context, BookList data) {
+    public void saveData(Context context) {
         FileOutputStream fos = null;
         ObjectOutputStream os = null;
         try {
             fos = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
             os = new ObjectOutputStream(fos);
-            os.writeObject(data);
+            os.writeObject(MainActivity.bookList);
         } catch (IOException e) {
             // Nothing to do here
         } finally {

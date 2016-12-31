@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Adaptor for displaying the list of books
+ * Adapter for displaying the list of books
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
@@ -59,10 +59,15 @@ public class BookListAdapter extends BaseAdapter {
         ImageView coverElement = (ImageView) rowView.findViewById(R.id.list_book_thumbnail);
 
         Book book = (Book) getItem(position);
-        String pageCounter = String.format("%s / %s", book.getPageRead(), book.getPageCount());
+
+        String author = book.getAuthor();
+        if (author.indexOf('\n') != -1) {
+            author = book.getAuthor().split("\n")[0] + " et al.";
+        }
+        String pageCounter = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
 
         titleElement.setText(book.getTitle());
-        authorElement.setText(book.getAuthor());
+        authorElement.setText(author);
         pagesElement.setText(pageCounter);
 
         return rowView;

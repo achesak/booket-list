@@ -15,7 +15,6 @@ public final class Book implements Serializable {
     private String author;
     private int pageCount;
     private int pageRead;
-    private boolean finishedReading;
     private String imageUrl;
     private String synopsis;
     private float userRating;
@@ -32,7 +31,6 @@ public final class Book implements Serializable {
         this.author = "";
         this.pageCount = 0;
         this.pageRead = 0;
-        this.finishedReading = false;
         this.imageUrl = "";
         this.synopsis = "";
         this.userRating = 0;
@@ -146,9 +144,6 @@ public final class Book implements Serializable {
      */
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
-        if (pageRead >= pageCount) {
-            setFinishedReading(true);
-        }
     }
 
 
@@ -168,27 +163,17 @@ public final class Book implements Serializable {
     public void setPageRead(int pageRead) {
         if (pageRead > pageCount) {
             pageRead = pageCount;
-            setFinishedReading(true);
         }
         this.pageRead = pageRead;
     }
 
 
     /**
-     * Gets if the book is done
-     * @return true if done reading, false otherwise
+     * Gets the percentage read
+     * @return percent read
      */
-    public boolean isFinishedReading() {
-        return finishedReading;
-    }
-
-
-    /**
-     * Sets if the book is done
-     * @param finishedReading true if done reading, false otherwise
-     */
-    public void setFinishedReading(boolean finishedReading) {
-        this.finishedReading = finishedReading;
+    public int getProgress() {
+        return (int) (((float) pageRead / pageCount) * 100);
     }
 
 
@@ -321,5 +306,14 @@ public final class Book implements Serializable {
      */
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+
+    /**
+     * Checks if the book is read
+     * @return true if done, false otherwise
+     */
+    public boolean isFinishedReading() {
+        return pageRead >= pageCount;
     }
 }
