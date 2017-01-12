@@ -112,11 +112,11 @@ public class SearchActivity extends AppCompatActivity {
                     for (int i = 0; i < categoryList.length(); i++) {
                         String row = categoryList.get(i).toString();
                         if (Book.checkTagAllowed(row)) {
-                            categories += row;
-                            if (i + 1 != categoryList.length()) {
-                                categories += ", ";
-                            }
+                            categories += row + ", ";
                         }
+                    }
+                    if (categories.endsWith(", ")) {
+                        categories = categories.substring(0, categories.length() - 2);
                     }
                     if (!firstSentence.equals("")) {
                         categories = firstSentence + "\n\n" + categories;
