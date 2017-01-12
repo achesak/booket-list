@@ -6,10 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -25,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
     // Application data:
     public static IO io;
     public static BookList bookList = new BookList();
-    public static HashMap<String, Object> imageCache = new HashMap<>();
+    final public static HashMap<String, Object> imageCache = new HashMap<>();
 
     // UI elements:
-    private ListView listView;
     private BookListAdapter adapter;
 
 
@@ -41,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listView = (ListView) findViewById(R.id.list_book);
+        ListView listView = (ListView) findViewById(R.id.list_book);
 
         if (io == null) {
-            io = new IO(getFilesDir());
+            io = new IO();
             bookList = io.readData(MainActivity.this);
         }
 

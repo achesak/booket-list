@@ -1,20 +1,19 @@
 package com.chesak.adam.readinglist;
 
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 /**
  * Shows the book details
@@ -71,19 +70,19 @@ public class BookDetailActivity extends AppCompatActivity {
             publisher += ", " + book.getPublishDate();
         }
         detailPublisher.setText(publisher);
-        String progress = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
+        String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
         detailProgress.setText(progress);
-        detailStarted.setText("Added " + book.getStartedReadingFormatted());
+        detailStarted.setText(getString(R.string.detail_started, book.getStartedReadingFormatted()));
         if (book.getSynopsis().equals("")) {
-            detailSynopsis.setText("No description provided");
+            detailSynopsis.setText(R.string.detail_no_synopsis);
         } else {
             detailSynopsis.setText(book.getSynopsis());
         }
         detailRating.setRating(book.getUserRating());
         if (book.getIsbn().equals("")) {
-            detailIsbn.setText("No ISBN provided");
+            detailIsbn.setText(R.string.detail_no_isbn);
         } else {
-            detailIsbn.setText("ISBN: " + book.getIsbn());
+            detailIsbn.setText(getString(R.string.detail_isbn,book.getIsbn()));
         }
 
         // Save book details on rating change
@@ -103,11 +102,9 @@ public class BookDetailActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutInflater inflater = (LayoutInflater)
-                        getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View npView = inflater.inflate(R.layout.number_picker_dialog, null);
+                View npView = View.inflate(BookDetailActivity.this, R.layout.number_picker_dialog, null);
                 final TextView pagesReadText = (TextView) npView.findViewById(R.id.number_picker);
-                pagesReadText.setText("" + book.getPageRead());
+                pagesReadText.setText(String.format(Locale.US, "%d", book.getPageRead()));
                 new AlertDialog.Builder(BookDetailActivity.this)
                         .setTitle("Pages read")
                         .setView(npView)

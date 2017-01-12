@@ -21,7 +21,6 @@ import org.json.JSONObject;
 public class BookListSearchAdapter extends BaseAdapter {
 
 
-    private Context context;
     private LayoutInflater inflater;
     private JSONArray dataSource;
 
@@ -32,7 +31,6 @@ public class BookListSearchAdapter extends BaseAdapter {
      * @param books list of books
      */
     public BookListSearchAdapter(Context context, JSONArray books) {
-        this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
     }

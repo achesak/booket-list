@@ -73,17 +73,6 @@ public class BookList implements Serializable {
 
 
     /**
-     * Used for sorting by date added
-     */
-    private class DateAddedComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            return book1.getStartedReading().compareTo(book2.getStartedReading());
-        }
-    }
-
-
-    /**
      * Used for sorting the main lists; sort by title, then date added
      */
     private class PrimaryComparator implements Comparator<Book> {
@@ -124,15 +113,6 @@ public class BookList implements Serializable {
      */
     public ArrayList<Book> getData() {
         return list;
-    }
-
-
-    /**
-     * Gets the entire finished list
-     * @return data
-     */
-    public ArrayList<Book> getFinishedData() {
-        return finishedList;
     }
 
 
@@ -186,16 +166,6 @@ public class BookList implements Serializable {
 
 
     /**
-     * Adds a book to the list
-     * @param book book
-     */
-    public void addFinished(Book book) {
-        finishedList.add(book);
-        sortFinished();
-    }
-
-
-    /**
      * Removes a book from the list
      * @param index index
      * @return removed book
@@ -220,6 +190,7 @@ public class BookList implements Serializable {
      */
     public void moveToFinished(int index) {
         finishedList.add(list.remove(index));
+        sortFinished();
     }
 
 
@@ -229,6 +200,7 @@ public class BookList implements Serializable {
      */
     public void moveToReading(int index) {
         list.add(finishedList.remove(index));
+        sort();
     }
 
 

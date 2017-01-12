@@ -1,19 +1,16 @@
 package com.chesak.adam.readinglist;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.loopj.android.http.*;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -152,10 +149,7 @@ public class SearchActivity extends AppCompatActivity {
 
                         // If no page count was found, prompt the user to enter it manually
                         if (book.getPageCount() == 0) {
-
-                            LayoutInflater inflater = (LayoutInflater)
-                                    getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                            View npView = inflater.inflate(R.layout.page_count_dialog, null);
+                            View npView = View.inflate(SearchActivity.this, R.layout.page_count_dialog, null);
                             final TextView pageCountText = (TextView) npView.findViewById(R.id.page_count_picker);
                             new AlertDialog.Builder(SearchActivity.this)
                                     .setTitle(R.string.add_book_no_page_count_title)

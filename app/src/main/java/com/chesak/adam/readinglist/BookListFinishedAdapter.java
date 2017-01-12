@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 /**
  * Adapter for displaying the list of books
  *
@@ -17,7 +19,6 @@ import android.widget.TextView;
 public class BookListFinishedAdapter extends BaseAdapter {
 
 
-    private Context context;
     private LayoutInflater inflater;
     private BookList dataSource;
 
@@ -28,7 +29,6 @@ public class BookListFinishedAdapter extends BaseAdapter {
      * @param books list of books
      */
     public BookListFinishedAdapter(Context context, BookList books) {
-        this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
     }
@@ -64,7 +64,7 @@ public class BookListFinishedAdapter extends BaseAdapter {
         if (author.indexOf('\n') != -1) {
             author = book.getAuthor().split("\n")[0] + " et al.";
         }
-        String pageCounter = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
+        String pageCounter = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
 
         titleElement.setText(book.getTitle());
         authorElement.setText(author);

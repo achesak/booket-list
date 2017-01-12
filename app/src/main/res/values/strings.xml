@@ -37,6 +37,10 @@
     <string name="detail_started_placeholder">Added 01/01/2000</string>
     <string name="detail_synopsis_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut tristique tortor. Phasellus quis varius libero. Maecenas maximus vel mi quis mollis. Sed nec nulla odio. Donec nec porta erat, a efficitur tortor. Suspendisse a malesuada quam. Pellentesque a pellentesque tellus. Quisque et ex feugiat, efficitur justo non, imperdiet ex. Maecenas ut condimentum erat. </string>
     <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
+    <string name="detail_started">Added %1$s</string>
+    <string name="detail_isbn">ISBN: %1$s</string>
+    <string name="detail_no_synopsis">No description provided</string>
+    <string name="detail_no_isbn">No ISBN provided</string>
     <string name="detail_update_button">Update pages read</string>
     <string name="detail_remove_button">Remove book</string>
 

@@ -2,8 +2,11 @@ package com.chesak.adam.readinglist;
 
 import android.graphics.Bitmap;
 
-import com.loopj.android.http.*;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
@@ -15,9 +18,9 @@ import java.net.URLEncoder;
  */
 public class OpenLibraryClient {
 
-    private static String SEARCH_URL = "http://openlibrary.org/search.json?";
-    private static String BOOK_URL = "http://openlibrary.org/api/books?jscmd=data&format=json&";
-    private static String THUMBNAIL_URL = "http://covers.openlibrary.org/b/id/";
+    final private static String SEARCH_URL = "http://openlibrary.org/search.json?";
+    final private static String BOOK_URL = "http://openlibrary.org/api/books?jscmd=data&format=json&";
+    final private static String THUMBNAIL_URL = "http://covers.openlibrary.org/b/id/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -39,11 +42,15 @@ public class OpenLibraryClient {
 
     private static String getSearchUrl(String title, String author) {
         String url = SEARCH_URL;
-        if (!title.equals("")) {
-            url += "title=" + URLEncoder.encode(title) + "&";
-        }
-        if (!author.equals("")) {
-            url += "author=" + URLEncoder.encode(author);
+        try {
+            if (!title.equals("")) {
+                url += "title=" + URLEncoder.encode(title, "UTF-8") + "&";
+            }
+            if (!author.equals("")) {
+                url += "author=" + URLEncoder.encode(author, "UTF-8");
+            }
+        } catch (UnsupportedEncodingException e) {
+            // Nothing to do here
         }
         return url;
     }

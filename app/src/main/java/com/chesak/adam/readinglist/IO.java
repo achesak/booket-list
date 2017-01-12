@@ -2,7 +2,6 @@ package com.chesak.adam.readinglist;
 
 import android.content.Context;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,21 +18,6 @@ public class IO {
 
 
     final private static String DATA_FILE_NAME = "book_data";
-    private File filesDir;
-
-
-    /**
-     * Constructor
-     * @param filesDir file directory
-     */
-    public IO(File filesDir) {
-        this.filesDir = filesDir;
-    }
-
-
-    public boolean fileExists() {
-        return new File(filesDir, DATA_FILE_NAME).exists();
-    }
 
 
     /**

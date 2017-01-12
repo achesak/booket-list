@@ -293,15 +293,6 @@ public final class Book implements Serializable {
 
 
     /**
-     * Sets te date reading started
-     * @param startedReading start date
-     */
-    public void setStartedReading(Date startedReading) {
-        this.startedReading = startedReading;
-    }
-
-
-    /**
      * Gets the publisher
      * @return publisher
      */
@@ -351,10 +342,6 @@ public final class Book implements Serializable {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
-    }
-
-    public String getKey() {
-        return key;
     }
 
     public void setKey(String key) {

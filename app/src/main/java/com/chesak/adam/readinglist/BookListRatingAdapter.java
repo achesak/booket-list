@@ -18,7 +18,6 @@ import android.widget.TextView;
 public class BookListRatingAdapter extends BaseAdapter {
 
 
-    private Context context;
     private LayoutInflater inflater;
     private BookList dataSource;
 
@@ -29,7 +28,6 @@ public class BookListRatingAdapter extends BaseAdapter {
      * @param books list of books
      */
     public BookListRatingAdapter(Context context, BookList books) {
-        this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
     }
