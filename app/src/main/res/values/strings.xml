@@ -6,8 +6,10 @@
 
     <!-- Main screen menu -->
     <string name="action_view_finished">Finished books</string>
+    <string name="action_view_progress">Book progress</string>
     <string name="action_view_highest">Highest rated</string>
     <string name="action_view_lowest">Lowest rated</string>
+    <string name="action_view_random">Random book</string>
     <string name="action_settings">Settings</string>
 
     <!-- Add book screen -->
@@ -23,6 +25,10 @@
     <string name="add_book_manual_submit_button">Add book</string>
     <string name="add_book_manual_instructions">All fields except title, author, and page count are optional</string>
 
+    <!-- Search screen -->
+    <string name="search_loading_filler">Loading…</string>
+    <string name="search_no_results">No results could be found</string>
+
     <!-- Book detail screen -->
     <string name="detail_title_placeholder">Book title</string>
     <string name="detail_author_placeholder">Author name</string>
@@ -34,6 +40,18 @@
     <string name="detail_update_button">Update pages read</string>
     <string name="detail_remove_button">Remove book</string>
 
+    <!-- Settings screen -->
+    <string name="settings_credits_title">Credits</string>
+    <string name="settings_credits_icons">Icons designed by Freepik from Flaticon</string>
+    <string name="settings_credits_icons_link">http://www.flaticon.com/authors/freepik</string>
+
     <!-- Dialog messages -->
     <string name="confirm_remove_book">Are you sure you want to remove this book?</string>
+    <string name="action_view_random_none">There are no books in the reading list.</string>
+    <string name="rating_not_found_title">Book not found</string>
+    <string name="rating_not_found">The selected book could not be found.</string>
+    <string name="add_book_no_entry_title">Nothing entered</string>
+    <string name="add_book_no_entry">A title or author must be entered.</string>
+    <string name="add_book_no_page_count_title">No page count found</string>
+    <string name="add_book_no_page_count">Unfortunately no page count could be found. Please enter the length of the book.</string>
 </resources>

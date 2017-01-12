@@ -12,6 +12,11 @@ import android.widget.EditText;
 
 import java.io.IOException;
 
+/**
+ * Shows the manual entry add book screen
+ *
+ * @author Adam Chesak, achesak@yahoo.com
+ */
 public class BookAddManualActivity extends AppCompatActivity {
 
     EditText titleText;
@@ -39,6 +44,10 @@ public class BookAddManualActivity extends AppCompatActivity {
         publishedText = (EditText) findViewById(R.id.add_book_manual_published);
         isbnText = (EditText) findViewById(R.id.add_book_manual_isbn);
 
+        // Fill fields from last screen.
+        titleText.setText(getIntent().getStringExtra("title"));
+        authorText.setText(getIntent().getStringExtra("author"));
+
         // Add data when button is clicked
         Button submitButton = (Button) findViewById(R.id.add_book_manual_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +58,10 @@ public class BookAddManualActivity extends AppCompatActivity {
                 String title = titleText.getText().toString().trim();
                 String author = authorText.getText().toString().trim();
                 String pageCountInput = pageCountText.getText().toString();
-                int pageCount = pageCountInput.equals("") ? 0 : Integer.parseInt(pageCountInput);
+                int pageCount = Integer.parseInt(pageCountInput);
+                if (pageCount == 0) {
+                    pageCount = 1;
+                }
                 String publisher = publisherText.getText().toString().trim();
                 String published = publishedText.getText().toString();
                 String isbn = isbnText.getText().toString().trim();

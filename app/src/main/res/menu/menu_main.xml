@@ -7,14 +7,22 @@
         android:title="@string/action_view_finished"
         android:orderInCategory="100" />
     <item
+        android:title="@string/action_view_progress"
+        android:orderInCategory="101"
+        android:id="@+id/action_view_progress" />
+    <item
         android:id="@+id/action_view_highest"
         android:title="@string/action_view_highest"
-        android:orderInCategory="101" />
+        android:orderInCategory="102" />
     <item android:title="@string/action_view_lowest"
         android:id="@+id/action_view_lowest"
-        android:orderInCategory="102" />
+        android:orderInCategory="103" />
+    <item
+        android:title="@string/action_view_random"
+        android:orderInCategory="104"
+        android:id="@+id/action_view_random" />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="103"
+        android:orderInCategory="105"
         android:title="@string/action_settings" />
 </menu>

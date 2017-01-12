@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,12 @@
         <activity android:name=".BookDetailActivity" />
         <activity android:name=".BookAddActivity" />
         <activity android:name=".BookAddManualActivity" />
+        <activity android:name=".RatingHighestActivity" />
+        <activity android:name=".RatingLowestActivity" />
+        <activity android:name=".BookFinishedActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ProgressActivity"></activity>
     </application>
 
 </manifest>

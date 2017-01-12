@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="@string/add_book_no_page_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_book_no_page_count"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textAlignment="viewStart"
+        android:textIsSelectable="false" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLength="6"
+        android:ems="10"
+        android:id="@+id/page_count_picker"
+        android:hint="@string/add_book_page_count"
+        android:textColor="#000000" />
+</LinearLayout>

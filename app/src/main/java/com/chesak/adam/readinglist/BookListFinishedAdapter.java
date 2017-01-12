@@ -2,7 +2,6 @@ package com.chesak.adam.readinglist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.TextView;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookListAdapter extends BaseAdapter {
+public class BookListFinishedAdapter extends BaseAdapter {
 
 
     private Context context;
@@ -28,7 +27,7 @@ public class BookListAdapter extends BaseAdapter {
      * @param context usually "this"
      * @param books list of books
      */
-    public BookListAdapter(Context context, BookList books) {
+    public BookListFinishedAdapter(Context context, BookList books) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
@@ -36,12 +35,12 @@ public class BookListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return dataSource.size();
+        return dataSource.sizeFinished();
     }
 
     @Override
     public Object getItem(int position) {
-        return dataSource.get(position);
+        return dataSource.getFinished(position);
     }
 
     @Override

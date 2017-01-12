@@ -2,12 +2,12 @@ package com.chesak.adam.readinglist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -15,7 +15,7 @@ import android.widget.TextView;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookListAdapter extends BaseAdapter {
+public class BookListRatingAdapter extends BaseAdapter {
 
 
     private Context context;
@@ -28,7 +28,7 @@ public class BookListAdapter extends BaseAdapter {
      * @param context usually "this"
      * @param books list of books
      */
-    public BookListAdapter(Context context, BookList books) {
+    public BookListRatingAdapter(Context context, BookList books) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
@@ -52,11 +52,12 @@ public class BookListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View rowView = inflater.inflate(R.layout.list_book_item, parent, false);
+        View rowView = inflater.inflate(R.layout.list_book_rating_item, parent, false);
 
         TextView titleElement = (TextView) rowView.findViewById(R.id.list_book_title);
         TextView authorElement = (TextView) rowView.findViewById(R.id.list_book_author);
-        TextView pagesElement = (TextView) rowView.findViewById(R.id.list_book_pages);
+        RatingBar ratingElement = (RatingBar) rowView.findViewById(R.id.list_book_rating);
+        ImageView iconElement = (ImageView) rowView.findViewById(R.id.list_book_icon);
         ImageView coverElement = (ImageView) rowView.findViewById(R.id.list_book_thumbnail);
 
         Book book = (Book) getItem(position);
@@ -65,11 +66,14 @@ public class BookListAdapter extends BaseAdapter {
         if (author.indexOf('\n') != -1) {
             author = book.getAuthor().split("\n")[0] + " et al.";
         }
-        String pageCounter = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
 
         titleElement.setText(book.getTitle());
         authorElement.setText(author);
-        pagesElement.setText(pageCounter);
+        ratingElement.setRating(book.getUserRating());
+
+        if (book.isFinishedReading()) {
+            iconElement.setImageResource(R.drawable.ic_book_closed_new);
+        }
 
         // Set the image
         if (!book.getThumbnailUrl().equals("")) {

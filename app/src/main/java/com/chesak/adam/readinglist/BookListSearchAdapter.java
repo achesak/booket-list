@@ -2,7 +2,6 @@ package com.chesak.adam.readinglist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Adapter for displaying the list of books
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookListAdapter extends BaseAdapter {
+public class BookListSearchAdapter extends BaseAdapter {
 
 
     private Context context;
     private LayoutInflater inflater;
-    private BookList dataSource;
+    private JSONArray dataSource;
 
 
     /**
@@ -28,7 +31,7 @@ public class BookListAdapter extends BaseAdapter {
      * @param context usually "this"
      * @param books list of books
      */
-    public BookListAdapter(Context context, BookList books) {
+    public BookListSearchAdapter(Context context, JSONArray books) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
@@ -36,12 +39,16 @@ public class BookListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return dataSource.size();
+        return dataSource.length();
     }
 
     @Override
     public Object getItem(int position) {
-        return dataSource.get(position);
+        try {
+            return dataSource.get(position);
+        } catch (JSONException e) {
+            return null;
+        }
     }
 
     @Override
@@ -56,32 +63,50 @@ public class BookListAdapter extends BaseAdapter {
 
         TextView titleElement = (TextView) rowView.findViewById(R.id.list_book_title);
         TextView authorElement = (TextView) rowView.findViewById(R.id.list_book_author);
-        TextView pagesElement = (TextView) rowView.findViewById(R.id.list_book_pages);
         ImageView coverElement = (ImageView) rowView.findViewById(R.id.list_book_thumbnail);
 
-        Book book = (Book) getItem(position);
+        JSONObject book = (JSONObject) getItem(position);
 
-        String author = book.getAuthor();
-        if (author.indexOf('\n') != -1) {
-            author = book.getAuthor().split("\n")[0] + " et al.";
+        String author = "";
+        try {
+            author = book.getJSONArray("author_name").get(0).toString();
+            if (book.getJSONArray("author_name").length() > 1) {
+                author += " et al.";
+            }
+        } catch (JSONException e) {
+            // Nothing to do here
         }
-        String pageCounter = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
 
-        titleElement.setText(book.getTitle());
+        String title = "";
+        try {
+            title = book.get("title").toString();
+        } catch (JSONException e) {
+            // Nothing to do here
+        }
+
+        String key = "";
+        try {
+            key = book.get("cover_i").toString();
+        } catch (JSONException e) {
+            // Nothing to do here
+        }
+
+        titleElement.setText(title);
         authorElement.setText(author);
-        pagesElement.setText(pageCounter);
 
-        // Set the image
-        if (!book.getThumbnailUrl().equals("")) {
-            Bitmap image = OpenLibraryClient.getImage(book.getThumbnailUrl());
+        if (!key.equals("")) {
+            String thumbnailUrl = OpenLibraryClient.getCoverThumbnail(key);
+            Bitmap image = OpenLibraryClient.getImage(thumbnailUrl);
             if (image != null) {
                 coverElement.setImageBitmap(image);
             } else {
-                new DownloadImageTask(coverElement, book.getThumbnailUrl()).execute(book.getThumbnailUrl());
+                new DownloadImageTask(coverElement, thumbnailUrl).execute(thumbnailUrl);
             }
             coverElement.setBackgroundResource(0);
         }
 
         return rowView;
     }
+
+
 }

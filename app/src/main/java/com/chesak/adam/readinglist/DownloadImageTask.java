@@ -9,13 +9,17 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 /**
- * Created by adam on 12/26/16.
+ * Async downloads an image
+ *
+ * @author Adam Chesak, achesak@yahoo.com
  */
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
+    String imageURL;
 
-    public DownloadImageTask(ImageView bmImage) {
+    public DownloadImageTask(ImageView bmImage, String imageURL) {
         this.bmImage = bmImage;
+        this.imageURL = imageURL;
     }
 
     protected Bitmap doInBackground(String... urls) {
@@ -33,5 +37,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap result) {
         bmImage.setImageBitmap(result);
+        MainActivity.imageCache.put(imageURL, result);
     }
 }

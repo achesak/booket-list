@@ -3,13 +3,17 @@ package com.chesak.adam.readinglist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.HashMap;
 
 /**
  * Main activity, shows the list of books
@@ -18,23 +22,10 @@ import android.widget.ListView;
  */
 public class MainActivity extends AppCompatActivity {
 
-
-
-
-
-
-
-    //https://openlibrary.org/dev/docs/api/search
-    //https://openlibrary.org/dev/docs/api/books
-
-
-
-
-
-
     // Application data:
     public static IO io;
     public static BookList bookList = new BookList();
+    public static HashMap<String, Object> imageCache = new HashMap<>();
 
     // UI elements:
     private ListView listView;
@@ -75,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent detailIntent = new Intent(MainActivity.this, BookDetailActivity.class);
                 detailIntent.putExtra("position", position);
                 detailIntent.putExtra("book", selectedBook);
+                detailIntent.putExtra("source", ReadingListConstants.SOURCE_MAIN);
                 startActivity(detailIntent);
             }
         });
@@ -107,17 +99,43 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.action_view_finished) {
-
+        switch (id) {
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            case R.id.action_view_finished:
+                Intent finishedIntent = new Intent(MainActivity.this, BookFinishedActivity.class);
+                startActivity(finishedIntent);
+                return true;
+            case R.id.action_view_highest:
+                Intent highestIntent = new Intent(MainActivity.this, RatingHighestActivity.class);
+                startActivity(highestIntent);
+                return true;
+            case R.id.action_view_lowest:
+                Intent lowestIntent = new Intent(MainActivity.this, RatingLowestActivity.class);
+                startActivity(lowestIntent);
+                return true;
+            case R.id.action_view_progress:
+                Intent progressIntent = new Intent(MainActivity.this, ProgressActivity.class);
+                startActivity(progressIntent);
+                return true;
+            case R.id.action_view_random:
+                BookData bookData = bookList.getRandomBook();
+                if (bookData == null) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle(R.string.action_view_random).setMessage(R.string.action_view_random_none)
+                            .setIcon(android.R.drawable.ic_dialog_alert).show();
+                    return false;
+                }
+                Intent randomIntent = new Intent(MainActivity.this, BookDetailActivity.class);
+                randomIntent.putExtra("book", bookData.getBook());
+                randomIntent.putExtra("position", bookData.getIndex());
+                randomIntent.putExtra("source", ReadingListConstants.SOURCE_MAIN);
+                startActivity(randomIntent);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

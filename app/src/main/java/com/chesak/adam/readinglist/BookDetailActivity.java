@@ -4,9 +4,11 @@ package com.chesak.adam.readinglist;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+/**
+ * Shows the book details
+ *
+ * @author Adam Chesak, achesak@yahoo.com
+ */
 public class BookDetailActivity extends AppCompatActivity {
 
 
@@ -38,6 +45,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
         // Get the selected book.
         final int position = getIntent().getIntExtra("position", 0);
+        final int source = getIntent().getIntExtra("source", 0);
         final Book book = (Book) getIntent().getSerializableExtra("book");
 
         // Set the action bar details
@@ -45,17 +53,22 @@ public class BookDetailActivity extends AppCompatActivity {
 
         // Set the fields
         if (!book.getImageUrl().equals("")) {
-            new DownloadImageTask(detailCover).execute(book.getImageUrl());
+            Bitmap image = OpenLibraryClient.getImage(book.getImageUrl());
+            if (image != null) {
+                detailCover.setImageBitmap(image);
+            } else {
+                new DownloadImageTask(detailCover, book.getImageUrl()).execute(book.getImageUrl());
+            }
+            detailCover.setBackgroundResource(0);
         }
         detailTitle.setText(book.getTitle());
         detailAuthor.setText(book.getAuthor());
         String publisher = "No publisher provided";
         if (!book.getPublisher().equals("")) {
-            if (book.getPublishDate().equals("")) {
-                publisher = book.getPublisher();
-            } else {
-                publisher = book.getPublisher() + ", " + book.getPublishDate();
-            }
+            publisher = book.getPublisher();
+        }
+        if (!book.getPublishDate().equals("")) {
+            publisher += ", " + book.getPublishDate();
         }
         detailPublisher.setText(publisher);
         String progress = String.format("%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
@@ -77,7 +90,11 @@ public class BookDetailActivity extends AppCompatActivity {
         detailRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                MainActivity.bookList.get(position).setUserRating(rating);
+                if (source == ReadingListConstants.SOURCE_MAIN) {
+                    MainActivity.bookList.get(position).setUserRating(rating);
+                } else if (source == ReadingListConstants.SOURCE_FINISHED) {
+                    MainActivity.bookList.getFinished(position).setUserRating(rating);
+                }
                 MainActivity.io.saveData(BookDetailActivity.this);
             }
         });
@@ -97,6 +114,9 @@ public class BookDetailActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.dialog_ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
+                                        int originalPagesRead = book.getPageRead();
+
+                                        // Get the new pages read input
                                         String pagesReadInput = pagesReadText.getText().toString().trim();
                                         if (pagesReadInput.equals("")) {
                                             return;
@@ -105,11 +125,26 @@ public class BookDetailActivity extends AppCompatActivity {
                                         if (pagesRead > book.getPageCount()) {
                                             pagesRead = book.getPageCount();
                                         }
-                                        book.setPageRead(pagesRead);
-                                        MainActivity.bookList.get(position).setPageRead(pagesRead);
-                                        if (pagesRead == book.getPageCount()) {
-                                            MainActivity.bookList.move(position);
+                                        if (pagesRead < 0) {
+                                            pagesRead = 0;
                                         }
+
+                                        // Set the pages read
+                                        book.setPageRead(pagesRead);
+                                        if (originalPagesRead != book.getPageCount()) {
+                                            MainActivity.bookList.get(position).setPageRead(pagesRead);
+                                        } else {
+                                            MainActivity.bookList.getFinished(position).setPageRead(pagesRead);
+                                        }
+
+                                        // Move to other list as needed
+                                        if (pagesRead == book.getPageCount()) {
+                                            MainActivity.bookList.moveToFinished(position);
+                                        } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
+                                            MainActivity.bookList.moveToReading(position);
+                                        }
+
+                                        // Save and switch to main view
                                         MainActivity.io.saveData(BookDetailActivity.this);
                                         Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
                                         startActivity(mainIntent);
@@ -134,7 +169,11 @@ public class BookDetailActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.dialog_ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        MainActivity.bookList.remove(position);
+                                        if (!book.isFinishedReading()) {
+                                            MainActivity.bookList.remove(position);
+                                        } else {
+                                            MainActivity.bookList.removeFinished(position);
+                                        }
                                         MainActivity.io.saveData(BookDetailActivity.this);
                                         Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
                                         startActivity(mainIntent);

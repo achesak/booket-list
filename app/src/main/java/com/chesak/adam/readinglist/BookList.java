@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * Represents a list of books. Basic wrapper around ArrayList<Book> with some added methods.
@@ -25,9 +26,9 @@ public class BookList implements Serializable {
         @Override
         public int compare(Book book1, Book book2) {
             if (book1.getUserRating() > book2.getUserRating()) {
-                return 1;
-            } else if (book1.getUserRating() < book2.getUserRating()) {
                 return -1;
+            } else if (book1.getUserRating() < book2.getUserRating()) {
+                return 1;
             } else {
                 return 0;
             }
@@ -42,9 +43,9 @@ public class BookList implements Serializable {
         @Override
         public int compare(Book book1, Book book2) {
             if (book1.getUserRating() < book2.getUserRating()) {
-                return 1;
-            } else if (book1.getUserRating() > book2.getUserRating()) {
                 return -1;
+            } else if (book1.getUserRating() > book2.getUserRating()) {
+                return 1;
             } else {
                 return 0;
             }
@@ -53,12 +54,47 @@ public class BookList implements Serializable {
 
 
     /**
-     * Used for sorting by date added; the usual sorting method
+     * Used for sorting by progress
+     */
+    private class ProgressComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            int p1 = book1.getProgress();
+            int p2 = book2.getProgress();
+            if (p1 < p2) {
+                return 1;
+            } else if (p1 > p2) {
+                return -1;
+            } else {
+                return book1.getStartedReading().compareTo(book2.getStartedReading());
+            }
+        }
+    }
+
+
+    /**
+     * Used for sorting by date added
      */
     private class DateAddedComparator implements Comparator<Book> {
         @Override
         public int compare(Book book1, Book book2) {
             return book1.getStartedReading().compareTo(book2.getStartedReading());
+        }
+    }
+
+
+    /**
+     * Used for sorting the main lists; sort by title, then date added
+     */
+    private class PrimaryComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            int comparison = book1.getTitle().toLowerCase().compareTo(book2.getTitle().toLowerCase());
+            if (comparison != 0) {
+                return comparison;
+            } else {
+                return book1.getStartedReading().compareTo(book2.getStartedReading());
+            }
         }
     }
 
@@ -182,8 +218,17 @@ public class BookList implements Serializable {
      * Moves a book to the finished list
      * @param index index in list
      */
-    public void move(int index) {
+    public void moveToFinished(int index) {
         finishedList.add(list.remove(index));
+    }
+
+
+    /**
+     * Moves a book to the reading list
+     * @param index index in list
+     */
+    public void moveToReading(int index) {
+        list.add(finishedList.remove(index));
     }
 
 
@@ -191,7 +236,7 @@ public class BookList implements Serializable {
      * Sorts the list by date added
      */
     public void sort() {
-        Collections.sort(list, new DateAddedComparator());
+        Collections.sort(list, new PrimaryComparator());
     }
 
 
@@ -199,7 +244,7 @@ public class BookList implements Serializable {
      * Sorts the finished list by date added
      */
     public void sortFinished() {
-        Collections.sort(finishedList, new DateAddedComparator());
+        Collections.sort(finishedList, new PrimaryComparator());
     }
 
 
@@ -207,7 +252,7 @@ public class BookList implements Serializable {
      * Gets the 10 highest rated books
      * @return list of books
      */
-    public ArrayList<Book> getHighestRated() {
+    public BookList getHighestRated() {
         return getHighestRated(10);
     }
 
@@ -216,7 +261,7 @@ public class BookList implements Serializable {
      * Gets the 10 lowest rated books
      * @return list of books
      */
-    public ArrayList<Book> getLowestRated() {
+    public BookList getLowestRated() {
         return getLowestRated(10);
     }
 
@@ -226,7 +271,7 @@ public class BookList implements Serializable {
      * @param count number of books to get
      * @return list of books
      */
-    public ArrayList<Book> getHighestRated(int count) {
+    public BookList getHighestRated(int count) {
         ArrayList<Book> copy = new ArrayList<>();
         copy.addAll(list);
         copy.addAll(finishedList);
@@ -234,16 +279,16 @@ public class BookList implements Serializable {
         if (count > copy.size()) {
             count = copy.size();
         }
-        return (ArrayList<Book>) copy.subList(0, count);
+        return new BookList(new ArrayList<>(copy.subList(0, count)));
     }
 
 
     /**
-     * Gets the lowest rated boks
+     * Gets the lowest rated books
      * @param count number of books to get
      * @return list of books
      */
-    public ArrayList<Book> getLowestRated(int count) {
+    public BookList getLowestRated(int count) {
         ArrayList<Book> copy = new ArrayList<>();
         copy.addAll(list);
         copy.addAll(finishedList);
@@ -251,7 +296,53 @@ public class BookList implements Serializable {
         if (count > copy.size()) {
             count = copy.size();
         }
-        return (ArrayList<Book>) copy.subList(0, count);
+        return new BookList(new ArrayList<>(copy.subList(0, count)));
+    }
+
+
+    /**
+     * Gets the list of books sorted by progress
+     * @return list of books
+     */
+    public BookList getProgressList() {
+        ArrayList<Book> copy = new ArrayList<>();
+        copy.addAll(list);
+        Collections.sort(copy, new ProgressComparator());
+        return new BookList(new ArrayList<>(copy));
+    }
+
+
+    /**
+     * Gets a random book from the reading list
+     * @return book data
+     */
+    public BookData getRandomBook() {
+        if (list.size() == 0) {
+            return null;
+        }
+        Random random = new Random();
+        int index = random.nextInt(list.size());
+        return new BookData(list.get(index), index);
+    }
+
+
+    /**
+     * Gets the index and list of a book
+     * @param book book to find
+     * @return book data
+     */
+    public BookData getIndex(Book book) {
+        for (int i = 0; i < list.size(); i++) {
+            if (book.equals(list.get(i))) {
+                return new BookData(book, i, ReadingListConstants.SOURCE_MAIN);
+            }
+        }
+        for (int i = 0; i < finishedList.size(); i++) {
+            if (book.equals(finishedList.get(i))) {
+                return new BookData(book, i, ReadingListConstants.SOURCE_FINISHED);
+            }
+        }
+        return null;
     }
 
 }

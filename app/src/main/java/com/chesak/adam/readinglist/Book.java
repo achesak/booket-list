@@ -16,12 +16,15 @@ public final class Book implements Serializable {
     private int pageCount;
     private int pageRead;
     private String imageUrl;
+    private String thumbnailUrl;
     private String synopsis;
     private float userRating;
     private String publishDate;
     private String isbn;
     private Date startedReading;
     private String publisher;
+    private String subtitle;
+    private String key;
 
     /**
      * Constructor: default
@@ -32,11 +35,15 @@ public final class Book implements Serializable {
         this.pageCount = 0;
         this.pageRead = 0;
         this.imageUrl = "";
+        this.thumbnailUrl = "";
         this.synopsis = "";
         this.userRating = 0;
         this.publishDate = "";
         this.isbn = "";
         this.startedReading = new Date();
+        this.subtitle = "";
+        this.key = "";
+        this.publisher = "";
     }
 
 
@@ -173,6 +180,9 @@ public final class Book implements Serializable {
      * @return percent read
      */
     public int getProgress() {
+        if (pageCount == 0) {
+            return 0;
+        }
         return (int) (((float) pageRead / pageCount) * 100);
     }
 
@@ -310,10 +320,44 @@ public final class Book implements Serializable {
 
 
     /**
+     * Gets the thumbnail URL
+     * @return URL
+     */
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+
+    /**
+     * Sets the thumbnail URL
+     * @param thumbnailUrl URL
+     */
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+
+    /**
      * Checks if the book is read
      * @return true if done, false otherwise
      */
     public boolean isFinishedReading() {
         return pageRead >= pageCount;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
