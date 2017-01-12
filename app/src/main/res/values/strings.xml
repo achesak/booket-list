@@ -68,4 +68,6 @@
     <string name="add_book_no_page_count">Unfortunately no page count could be found. Please enter the length of the book.</string>
     <string name="confirm_clear_data_title">Clear data</string>
     <string name="confirm_clear_data">Are you sure you want to clear the %1$s list?</string>
+    <string name="search_no_book_title">No book data</string>
+    <string name="search_no_book">No book data could be found.</string>
 </resources>

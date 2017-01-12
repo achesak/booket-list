@@ -127,9 +127,12 @@ public class SearchActivity extends AppCompatActivity {
                     // Nothing to do here
                 }
 
+                // If the book data could not be retrieved, stop here
                 if (bookData == null) {
+                    new AlertDialog.Builder(SearchActivity.this)
+                            .setTitle(R.string.search_no_book_title).setMessage(R.string.search_no_book)
+                            .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
-                    // TODO: do something more here later!
                 }
 
                 OpenLibraryClient.getBook(key, null, new JsonHttpResponseHandler() {
