@@ -35,7 +35,7 @@
     <string name="detail_published_placeholder">Publisher name, 2000</string>
     <string name="detail_progress_placeholder">0 / 1000 (0%)</string>
     <string name="detail_started_placeholder">Added 01/01/2000</string>
-    <string name="detail_synopsis_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut tristique tortor. Phasellus quis varius libero. Maecenas maximus vel mi quis mollis. Sed nec nulla odio. Donec nec porta erat, a efficitur tortor. Suspendisse a malesuada quam. Pellentesque a pellentesque tellus. Quisque et ex feugiat, efficitur justo non, imperdiet ex. Maecenas ut condimentum erat. </string>
+    <string name="detail_synopsis_placeholder">Description goes here</string>
     <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
     <string name="detail_started">Added %1$s</string>
     <string name="detail_isbn">ISBN: %1$s</string>

@@ -111,7 +111,7 @@ public class SearchActivity extends AppCompatActivity {
                     JSONArray categoryList = bookData.getJSONArray("subject");
                     for (int i = 0; i < categoryList.length(); i++) {
                         String row = categoryList.get(i).toString();
-                        if (!row.equals("In library") && !row.equals("Accessible book") && !row.equals("Protected DAISY") && !row.toLowerCase().contains("ebook")) {
+                        if (Book.checkTagAllowed(row)) {
                             categories += row;
                             if (i + 1 != categoryList.length()) {
                                 categories += ", ";

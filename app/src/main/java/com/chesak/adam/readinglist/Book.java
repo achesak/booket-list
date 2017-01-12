@@ -101,6 +101,21 @@ public final class Book implements Serializable {
 
 
     /**
+     * Checks if the tag included in the book description should be displayed
+     * @param tag tag
+     * @return true if allowed, false otherwise
+     */
+    public static boolean checkTagAllowed(String tag) {
+        tag = tag.toLowerCase();
+        if (tag.equals("in library") || tag.equals("accessible book") || tag.equals("protected daisy") || tag.contains("ebook") ||
+                tag.contains("e-book") || tag.equals("overdrive")) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
      * Gets the title
      * @return title
      */
@@ -336,14 +351,29 @@ public final class Book implements Serializable {
         return pageRead >= pageCount;
     }
 
+
+    /**
+     * Gets the subtitle
+     * @return subtitle
+     */
     public String getSubtitle() {
         return subtitle;
     }
 
+
+    /**
+     * Sets the subtitle
+     * @param subtitle subtitle
+     */
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
     }
 
+
+    /**
+     * Sets the key
+     * @param key key
+     */
     public void setKey(String key) {
         this.key = key;
     }
