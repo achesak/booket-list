@@ -48,6 +48,8 @@
     <string name="settings_credits_title">Credits</string>
     <string name="settings_credits_icons">Icons designed by Freepik from Flaticon</string>
     <string name="settings_credits_icons_link">http://www.flaticon.com/authors/freepik</string>
+    <string name="settings_credits_app_icon">App icon designed by Paomedia, available under Creative Commons (Attribution 3.0 Unported)</string>
+    <string name="settings_credits_app_icon_link">https://creativecommons.org/licenses/by/3.0/</string>
 
     <!-- Dialog messages -->
     <string name="confirm_remove_book">Are you sure you want to remove this book?</string>

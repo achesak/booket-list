@@ -38,4 +38,26 @@
         android:layout_below="@+id/settings_credits_icons"
         android:layout_alignStart="@+id/settings_credits_icons"
         android:autoLink="web" />
+
+    <TextView
+        android:text="@string/settings_credits_app_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_credits_app_icon"
+        android:layout_below="@+id/settings_credits_icons_link"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="@string/settings_credits_app_icon_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_credits_app_icon_link"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:autoLink="web"
+        android:textAlignment="center"
+        android:layout_below="@+id/settings_credits_app_icon"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
