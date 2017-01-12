@@ -317,4 +317,29 @@ public class BookList implements Serializable {
         return null;
     }
 
+
+    /**
+     * Clears the reading list
+     */
+    public void clearReading() {
+        list.clear();
+    }
+
+
+    /**
+     * Clears the finished list
+     */
+    public void clearFinished() {
+        finishedList.clear();
+    }
+
+
+    /**
+     * Clears the entire book list
+     */
+    public void clearAll() {
+        clearReading();
+        clearFinished();
+    }
+
 }

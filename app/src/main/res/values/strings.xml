@@ -45,6 +45,11 @@
     <string name="detail_remove_button">Remove book</string>
 
     <!-- Settings screen -->
+    <string name="settings_data_title">Data</string>
+    <string name="settings_data_reading">Currently reading</string>
+    <string name="settings_data_finished">Finished</string>
+    <string name="settings_data_all">Everything</string>
+    <string name="settings_data_clear_button">Clear data</string>
     <string name="settings_credits_title">Credits</string>
     <string name="settings_credits_icons">Icons designed by Freepik from Flaticon</string>
     <string name="settings_credits_icons_link">http://www.flaticon.com/authors/freepik</string>
@@ -52,6 +57,7 @@
     <string name="settings_credits_app_icon_link">https://creativecommons.org/licenses/by/3.0/</string>
 
     <!-- Dialog messages -->
+    <string name="confirm_remove_book_title">Remove book</string>
     <string name="confirm_remove_book">Are you sure you want to remove this book?</string>
     <string name="action_view_random_none">There are no books in the reading list.</string>
     <string name="rating_not_found_title">Book not found</string>
@@ -60,4 +66,6 @@
     <string name="add_book_no_entry">A title or author must be entered.</string>
     <string name="add_book_no_page_count_title">No page count found</string>
     <string name="add_book_no_page_count">Unfortunately no page count could be found. Please enter the length of the book.</string>
+    <string name="confirm_clear_data_title">Clear data</string>
+    <string name="confirm_clear_data">Are you sure you want to clear the %1$s list?</string>
 </resources>

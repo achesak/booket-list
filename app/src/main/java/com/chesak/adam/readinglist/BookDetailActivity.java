@@ -162,7 +162,7 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(BookDetailActivity.this)
-                        .setTitle("Remove book").setMessage(R.string.confirm_remove_book)
+                        .setTitle(R.string.confirm_remove_book_title).setMessage(R.string.confirm_remove_book)
                         .setPositiveButton(R.string.dialog_ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
