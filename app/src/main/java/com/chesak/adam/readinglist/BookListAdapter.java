@@ -19,8 +19,16 @@ import java.util.Locale;
 public class BookListAdapter extends BaseAdapter {
 
 
-    private LayoutInflater inflater;
-    private BookList dataSource;
+    protected LayoutInflater inflater;
+    protected BookList dataSource;
+
+
+    static class ViewHolder {
+        private TextView titleElement;
+        private TextView authorElement;
+        private TextView pagesElement;
+        private ImageView coverElement;
+    }
 
 
     /**
@@ -31,6 +39,14 @@ public class BookListAdapter extends BaseAdapter {
     public BookListAdapter(Context context, BookList books) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.dataSource = books;
+    }
+
+
+    /**
+     * Default constructor (unused)
+     */
+    public BookListAdapter() {
+
     }
 
     @Override
@@ -51,12 +67,23 @@ public class BookListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View rowView = inflater.inflate(R.layout.list_book_item, parent, false);
+        ViewHolder viewHolder;
 
-        TextView titleElement = (TextView) rowView.findViewById(R.id.list_book_title);
-        TextView authorElement = (TextView) rowView.findViewById(R.id.list_book_author);
-        TextView pagesElement = (TextView) rowView.findViewById(R.id.list_book_pages);
-        ImageView coverElement = (ImageView) rowView.findViewById(R.id.list_book_thumbnail);
+        if (convertView == null) {
+
+            convertView = inflater.inflate(R.layout.list_book_item, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.titleElement = (TextView) convertView.findViewById(R.id.list_book_title);
+            viewHolder.authorElement = (TextView) convertView.findViewById(R.id.list_book_author);
+            viewHolder.pagesElement = (TextView) convertView.findViewById(R.id.list_book_pages);
+            viewHolder.coverElement = (ImageView) convertView.findViewById(R.id.list_book_thumbnail);
+
+            convertView.setTag(viewHolder);
+
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
         Book book = (Book) getItem(position);
 
@@ -66,21 +93,21 @@ public class BookListAdapter extends BaseAdapter {
         }
         String pageCounter = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(), book.getProgress());
 
-        titleElement.setText(book.getTitle());
-        authorElement.setText(author);
-        pagesElement.setText(pageCounter);
+        viewHolder.titleElement.setText(book.getTitle());
+        viewHolder.authorElement.setText(author);
+        viewHolder.pagesElement.setText(pageCounter);
 
         // Set the image
         if (!book.getThumbnailUrl().equals("")) {
             Bitmap image = OpenLibraryClient.getImage(book.getThumbnailUrl());
             if (image != null) {
-                coverElement.setImageBitmap(image);
+                viewHolder.coverElement.setImageBitmap(image);
             } else {
-                new DownloadImageTask(coverElement, book.getThumbnailUrl()).execute(book.getThumbnailUrl());
+                new DownloadImageTask(viewHolder.coverElement, book.getThumbnailUrl()).execute(book.getThumbnailUrl());
             }
-            coverElement.setBackgroundResource(0);
+            viewHolder.coverElement.setBackgroundResource(0);
         }
 
-        return rowView;
+        return convertView;
     }
 }
