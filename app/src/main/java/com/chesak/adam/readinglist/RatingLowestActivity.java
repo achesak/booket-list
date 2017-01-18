@@ -1,9 +1,9 @@
 package com.chesak.adam.readinglist;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,7 +22,7 @@ public class RatingLowestActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         // Set the action bar details
-        setTitle("Lowest rated");
+        setTitle(R.string.title_lowest_rated);
 
         final BookList lowestRated = MainActivity.bookList.getLowestRated();
 

@@ -22,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         // Set the action bar details
-        setTitle("Settings");
+        setTitle(R.string.title_settings);
 
         // Clear data
         Button clearButton = (Button) findViewById(R.id.settings_data_clear_button);

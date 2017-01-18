@@ -32,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         // Set the action bar details
-        setTitle("Search");
+        setTitle(R.string.title_search);
 
         book = new Book();
 

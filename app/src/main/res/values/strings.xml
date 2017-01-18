@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Reading List</string>
 
-    <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel">Cancel</string>
+    <!-- Activity titles -->
+    <string name="title_main">Current books</string>
+    <string name="title_add">Add book</string>
+    <string name="title_highest_rated">Highest rated</string>
+    <string name="title_lowest_rated">Lowest rated</string>
+    <string name="title_progress">Book progress</string>
+    <string name="title_search">Search</string>
+    <string name="title_settings">Settings</string>
 
     <!-- Main screen menu -->
     <string name="action_view_finished">Finished books</string>
@@ -58,6 +64,10 @@
     <string name="settings_credits_app_icon">App icon designed by Paomedia, available under Creative Commons (Attribution 3.0 Unported)</string>
     <string name="settings_credits_app_icon_link">https://creativecommons.org/licenses/by/3.0/</string>
 
+    <!-- Dialog buttons -->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <!-- Dialog messages -->
     <string name="confirm_remove_book_title">Remove book</string>
     <string name="confirm_remove_book">Are you sure you want to remove this book?</string>
@@ -68,6 +78,8 @@
     <string name="add_book_no_entry">A title or author must be entered.</string>
     <string name="add_book_no_page_count_title">No page count found</string>
     <string name="add_book_no_page_count">Unfortunately no page count could be found. Please enter the length of the book.</string>
+    <string name="add_book_manual_no_entry_title">Add book</string>
+    <string name="add_book_manual_no_entry">Title, author, and page count cannot be left blank.</string>
     <string name="confirm_clear_data_title">Clear data</string>
     <string name="confirm_clear_data">Are you sure you want to clear the %1$s list?</string>
     <string name="search_no_book_title">No book data</string>

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         io.saveData(MainActivity.this);
 
         // Set the action bar details
-        setTitle("Current books");
+        setTitle(R.string.title_main);
 
         // Display the book list
         adapter = new BookListAdapter(this, bookList);

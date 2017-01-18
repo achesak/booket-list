@@ -25,7 +25,7 @@ public class BookAddActivity extends AppCompatActivity {
         final EditText authorText = (EditText) findViewById(R.id.add_book_author);
 
         // Set the action bar details
-        setTitle("Add book");
+        setTitle(R.string.title_add);
 
         // Add a book
         Button addButton = (Button) findViewById(R.id.add_book_submit_button);

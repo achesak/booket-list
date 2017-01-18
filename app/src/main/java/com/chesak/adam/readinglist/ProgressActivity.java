@@ -1,9 +1,9 @@
 package com.chesak.adam.readinglist;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,7 +19,7 @@ public class ProgressActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_progress);
 
         // Set the title
-        setTitle("Book progress");
+        setTitle(R.string.title_progress);
 
         final BookList progressList = MainActivity.bookList.getProgressList();
 

@@ -32,7 +32,7 @@ public class BookAddManualActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         // Set the action bar details
-        setTitle("Add book");
+        setTitle(R.string.title_add);
 
         titleText = (EditText) findViewById(R.id.add_book_manual_title);
         authorText = (EditText) findViewById(R.id.add_book_manual_author);
@@ -65,7 +65,7 @@ public class BookAddManualActivity extends AppCompatActivity {
 
                 if (title.equals("") || author.equals("") || pageCountInput.equals("")) {
                     new AlertDialog.Builder(BookAddManualActivity.this)
-                            .setTitle("Add book").setMessage("Title, author, and page count cannot be left blank.")
+                            .setTitle(R.string.add_book_manual_no_entry_title).setMessage(R.string.add_book_manual_no_entry)
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
                 }
