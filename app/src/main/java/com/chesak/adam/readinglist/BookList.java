@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookList implements Serializable {
+final public class BookList implements Serializable {
 
 
     // Data list:

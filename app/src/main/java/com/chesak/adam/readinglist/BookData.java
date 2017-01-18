@@ -5,7 +5,7 @@ package com.chesak.adam.readinglist;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookData {
+final public class BookData {
 
     private Book book;
     private int index;

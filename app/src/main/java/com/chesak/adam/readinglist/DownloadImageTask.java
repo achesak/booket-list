@@ -3,7 +3,6 @@ package com.chesak.adam.readinglist;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.InputStream;
@@ -13,7 +12,8 @@ import java.io.InputStream;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+final public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
     ImageView bmImage;
     String imageURL;
 
@@ -29,7 +29,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
             InputStream in = new java.net.URL(urlDisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
         return mIcon11;

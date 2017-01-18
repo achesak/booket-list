@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class IO {
+final public class IO {
 
 
     final private static String DATA_FILE_NAME = "book_data";
