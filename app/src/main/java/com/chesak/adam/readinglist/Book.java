@@ -106,11 +106,8 @@ public final class Book implements Serializable {
      */
     public static boolean checkTagAllowed(String tag) {
         tag = tag.toLowerCase();
-        if (tag.equals("in library") || tag.equals("accessible book") || tag.equals("protected daisy") || tag.contains("ebook") ||
-                tag.contains("e-book") || tag.equals("overdrive")) {
-            return false;
-        }
-        return true;
+        return !(tag.equals("in library") || tag.equals("accessible book") || tag.equals("protected daisy") || tag.contains("ebook") ||
+                 tag.contains("e-book") || tag.equals("overdrive"));
     }
 
 
