@@ -3,6 +3,7 @@ package com.chesak.adam.readinglist;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Represents a book in the reading list. Some fields may not be used yet.
@@ -24,7 +25,6 @@ public final class Book implements Serializable {
     private Date startedReading;
     private String publisher;
     private String subtitle;
-    private String key;
 
     /**
      * Constructor: default
@@ -42,7 +42,6 @@ public final class Book implements Serializable {
         this.isbn = "";
         this.startedReading = new Date();
         this.subtitle = "";
-        this.key = "";
         this.publisher = "";
     }
 
@@ -302,7 +301,7 @@ public final class Book implements Serializable {
 
 
     public String getStartedReadingFormatted() {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         return format.format(this.getStartedReading());
     }
 
@@ -367,14 +366,5 @@ public final class Book implements Serializable {
      */
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
-    }
-
-
-    /**
-     * Sets the key
-     * @param key key
-     */
-    public void setKey(String key) {
-        this.key = key;
     }
 }

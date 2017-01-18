@@ -96,7 +96,6 @@ public class SearchActivity extends AppCompatActivity {
                         }
                         book.setAuthor(author);
                     }
-                    book.setKey(key);
                     book.setPublishDate(bookData.get("first_publish_year").toString());
                     book.setImageUrl(OpenLibraryClient.getCover(bookData.get("cover_i").toString()));
                     book.setThumbnailUrl(OpenLibraryClient.getCoverThumbnail(bookData.get("cover_i").toString()));
