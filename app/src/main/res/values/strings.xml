@@ -30,6 +30,8 @@
     <string name="search_no_results">No results could be found</string>
 
     <!-- Book detail screen -->
+    <string name="detail_cover_placeholder">Book cover</string>
+    <string name="detail_icon_placeholder">Book progress icon</string>
     <string name="detail_title_placeholder">Book title</string>
     <string name="detail_author_placeholder">Author name</string>
     <string name="detail_published_placeholder">Publisher name, 2000</string>

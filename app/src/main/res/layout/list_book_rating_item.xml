@@ -15,7 +15,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
         android:scaleType="centerInside"
-        android:background="@drawable/ic_book_closed_new" />
+        android:background="@drawable/ic_book_closed_new"
+        android:contentDescription="@string/detail_cover_placeholder" />
 
     <RelativeLayout
         android:id="@+id/list_book_text_layout"
@@ -23,21 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/list_book_thumbnail"
-        android:layout_toStartOf="@id/list_book_pages">
+        android:layout_toStartOf="@id/list_book_pages"
+        tools:ignore="RelativeOverlap">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_book_open_new"
-            android:layout_marginLeft="8dp"
-            android:id="@+id/list_book_icon" />
+            android:layout_marginStart="8dp"
+            android:id="@+id/list_book_icon"
+            android:contentDescription="@string/detail_progress_placeholder" />
 
         <TextView
             android:id="@+id/list_book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="36dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="8dp"
             android:textSize="18sp"
             tools:text="Title"
             />
@@ -63,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:paddingEnd="0dp"
+        android:paddingStart="0dp"
         style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
         android:numStars="5"
         android:layout_centerVertical="true"
