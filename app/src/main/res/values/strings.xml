@@ -42,9 +42,11 @@
     <string name="detail_author_placeholder">Author name</string>
     <string name="detail_published_placeholder">Publisher name, 2000</string>
     <string name="detail_progress_placeholder">0 / 1000 (0%)</string>
+    <string name="detail_days_placeholder">10 days remaining (2 pages per day)</string>
     <string name="detail_started_placeholder">Added 01/01/2000</string>
     <string name="detail_synopsis_placeholder">Description goes here</string>
     <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
+    <string name="detail_days">%1$d days remaining (%2$d pages per day)</string>
     <string name="detail_started">Added %1$s</string>
     <string name="detail_isbn">ISBN: %1$s</string>
     <string name="detail_no_synopsis">No description provided</string>
@@ -53,6 +55,8 @@
     <string name="detail_remove_button">Remove book</string>
 
     <!-- Settings screen -->
+    <string name="settings_page_rate_title">Reading speed</string>
+    <string name="settings_page_rate">Pages per day</string>
     <string name="settings_data_title">Data</string>
     <string name="settings_data_reading">Currently reading</string>
     <string name="settings_data_finished">Finished</string>

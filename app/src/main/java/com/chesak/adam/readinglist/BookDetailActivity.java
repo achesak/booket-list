@@ -34,6 +34,7 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView detailAuthor = (TextView) findViewById(R.id.detail_author);
         TextView detailPublisher = (TextView) findViewById(R.id.detail_publisher);
         final TextView detailProgress = (TextView) findViewById(R.id.detail_progess);
+        TextView detailDays = (TextView) findViewById(R.id.detail_days);
         TextView detailStarted = (TextView) findViewById(R.id.detail_started);
         TextView detailSynopsis = (TextView) findViewById(R.id.detail_synopsis);
         RatingBar detailRating = (RatingBar) findViewById(R.id.detail_rating);
@@ -72,6 +73,12 @@ public class BookDetailActivity extends AppCompatActivity {
         detailPublisher.setText(publisher);
         String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
         detailProgress.setText(progress);
+        if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
+            detailDays.setVisibility(View.GONE);
+        } else {
+            int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
+            detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+        }
         detailStarted.setText(getString(R.string.detail_started, book.getStartedReadingFormatted()));
         if (book.getSynopsis().equals("")) {
             detailSynopsis.setText(R.string.detail_no_synopsis);

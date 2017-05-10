@@ -4,9 +4,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
+
+import java.util.Locale;
 
 /**
  * Shows the settings
@@ -23,6 +28,33 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Set the action bar details
         setTitle(R.string.title_settings);
+
+        // Update page rate
+        final EditText pageRateText = (EditText) findViewById(R.id.settings_page_rate);
+        if (MainActivity.settings.pageRate > 0) {
+            pageRateText.setText(String.format(Locale.US, "%d", MainActivity.settings.pageRate));
+        }
+        pageRateText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String pageRateInput = pageRateText.getText().toString();
+                if (pageRateInput.equals("")) {
+                    pageRateInput = "0";
+                }
+                MainActivity.settings.pageRate = Integer.parseInt(pageRateInput);
+                MainActivity.io.saveSettings(SettingsActivity.this);
+            }
+        });
 
         // Clear data
         Button clearButton = (Button) findViewById(R.id.settings_data_clear_button);

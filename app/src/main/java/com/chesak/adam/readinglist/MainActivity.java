@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Application data:
     public static IO io;
+    public static SettingsData settings = new SettingsData();
     public static BookList bookList = new BookList();
     final public static HashMap<String, Object> imageCache = new HashMap<>();
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (io == null) {
             io = new IO();
             bookList = io.readData(MainActivity.this);
+            settings = io.readSettings(MainActivity.this);
         }
 
         io.saveData(MainActivity.this);
