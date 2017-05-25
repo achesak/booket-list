@@ -103,7 +103,7 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
@@ -115,11 +115,11 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
                 tools:ignore="ButtonStyle" />
 
             <Button
-                android:text="@string/detail_remove_button"
-                android:layout_width="match_parent"
+                android:layout_width="52dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_remove"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle"
+                android:background="@android:drawable/ic_menu_delete" />
         </LinearLayout>
 
     </LinearLayout>
