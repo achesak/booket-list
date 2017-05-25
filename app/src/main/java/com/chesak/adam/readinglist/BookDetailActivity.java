@@ -7,8 +7,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,13 +37,13 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView detailAuthor = (TextView) findViewById(R.id.detail_author);
         TextView detailPublisher = (TextView) findViewById(R.id.detail_publisher);
         final TextView detailProgress = (TextView) findViewById(R.id.detail_progess);
-        TextView detailDays = (TextView) findViewById(R.id.detail_days);
+        final TextView detailDays = (TextView) findViewById(R.id.detail_days);
         TextView detailStarted = (TextView) findViewById(R.id.detail_started);
         TextView detailSynopsis = (TextView) findViewById(R.id.detail_synopsis);
         RatingBar detailRating = (RatingBar) findViewById(R.id.detail_rating);
         TextView detailIsbn = (TextView) findViewById(R.id.detail_isbn);
 
-        Button updateButton = (Button) findViewById(R.id.detail_update);
+        final EditText detailPageCount = (EditText) findViewById(R.id.detail_page_count);
         Button removeButton = (Button) findViewById(R.id.detail_remove);
 
         // Get the selected book.
@@ -105,62 +108,59 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
 
-        // Update page count
-        updateButton.setOnClickListener(new View.OnClickListener() {
+        // Update page count on text change
+        detailPageCount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                View npView = View.inflate(BookDetailActivity.this, R.layout.number_picker_dialog, null);
-                final TextView pagesReadText = (TextView) npView.findViewById(R.id.number_picker);
-                pagesReadText.setText(String.format(Locale.US, "%d", book.getPageRead()));
-                new AlertDialog.Builder(BookDetailActivity.this)
-                        .setTitle("Pages read")
-                        .setView(npView)
-                        .setPositiveButton(R.string.dialog_ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        int originalPagesRead = book.getPageRead();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                                        // Get the new pages read input
-                                        String pagesReadInput = pagesReadText.getText().toString().trim();
-                                        if (pagesReadInput.equals("")) {
-                                            return;
-                                        }
-                                        int pagesRead = Integer.parseInt(pagesReadInput);
-                                        if (pagesRead > book.getPageCount()) {
-                                            pagesRead = book.getPageCount();
-                                        }
-                                        if (pagesRead < 0) {
-                                            pagesRead = 0;
-                                        }
+            }
 
-                                        // Set the pages read
-                                        book.setPageRead(pagesRead);
-                                        if (originalPagesRead != book.getPageCount()) {
-                                            MainActivity.bookList.get(position).setPageRead(pagesRead);
-                                        } else {
-                                            MainActivity.bookList.getFinished(position).setPageRead(pagesRead);
-                                        }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                                        // Move to other list as needed
-                                        if (pagesRead == book.getPageCount()) {
-                                            MainActivity.bookList.moveToFinished(position);
-                                        } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
-                                            MainActivity.bookList.moveToReading(position);
-                                        }
+            }
 
-                                        // Save and switch to main view
-                                        MainActivity.io.saveData(BookDetailActivity.this);
-                                        Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
-                                        startActivity(mainIntent);
-                                    }
-                                })
-                        .setNegativeButton(R.string.dialog_cancel,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        // Nothing to do here
-                                    }
-                                })
-                        .create().show();
+            @Override
+            public void afterTextChanged(Editable s) {
+                int originalPagesRead = book.getPageRead();
+
+                // Get the new pages read input
+                String pagesReadInput = detailPageCount.getText().toString().trim();
+                if (pagesReadInput.equals("")) {
+                    return;
+                }
+                int pagesRead = Integer.parseInt(pagesReadInput);
+                if (pagesRead > book.getPageCount()) {
+                    pagesRead = book.getPageCount();
+                }
+                if (pagesRead < 0) {
+                    pagesRead = 0;
+                }
+
+                // Update the other details page
+                String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
+                detailProgress.setText(progress);
+                if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
+                    detailDays.setVisibility(View.GONE);
+                } else {
+                    int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
+                    detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+                }
+
+                // Set the pages read
+                book.setPageRead(pagesRead);
+                if (originalPagesRead != book.getPageCount()) {
+                    MainActivity.bookList.get(position).setPageRead(pagesRead);
+                } else {
+                    MainActivity.bookList.getFinished(position).setPageRead(pagesRead);
+                }
+
+                // Move to other list as needed
+                if (pagesRead == book.getPageCount()) {
+                    MainActivity.bookList.moveToFinished(position);
+                } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
+                    MainActivity.bookList.moveToReading(position);
+                }
             }
         });
 

@@ -103,16 +103,18 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <Button
-                android:text="@string/detail_update_button"
-                android:layout_width="wrap_content"
+            <EditText
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/detail_update"
-                tools:ignore="ButtonStyle" />
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/detail_page_count"
+                android:layout_weight="1"
+                android:hint="@string/detail_update_pages_text" />
 
             <Button
                 android:layout_width="52dp"
@@ -120,6 +122,7 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
                 android:id="@+id/detail_remove"
                 tools:ignore="ButtonStyle"
                 android:background="@android:drawable/ic_menu_delete" />
+
         </LinearLayout>
 
     </LinearLayout>
