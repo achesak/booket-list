@@ -32,8 +32,10 @@
     <string name="add_book_manual_instructions">All fields except title, author, and page count are optional</string>
 
     <!-- Search screen -->
-    <string name="search_loading_filler">Loading…</string>
+    <string name="search_loading_filler">Loading books…</string>
     <string name="search_no_results">No results could be found</string>
+    <string name="search_no_results_title">Title: %1$s</string>
+    <string name="search_no_results_author">Author: %1$s</string>
 
     <!-- Book detail screen -->
     <string name="detail_cover_placeholder">Book cover</string>

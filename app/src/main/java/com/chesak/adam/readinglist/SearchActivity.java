@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -36,8 +37,8 @@ public class SearchActivity extends AppCompatActivity {
 
         book = new Book();
 
-        String title = getIntent().getStringExtra("title");
-        String author = getIntent().getStringExtra("author");
+        final String title = getIntent().getStringExtra("title");
+        final String author = getIntent().getStringExtra("author");
 
         final ListView listView = (ListView) findViewById(R.id.list_search);
         final TextView loadingView = (TextView) findViewById(R.id.search_loading_filler);
@@ -56,7 +57,14 @@ public class SearchActivity extends AppCompatActivity {
                         BookListSearchAdapter adapter = new BookListSearchAdapter(SearchActivity.this, response.getJSONArray("docs"));
                         listView.setAdapter(adapter);
                     } else {
-                        loadingView.setText(R.string.search_no_results);
+                        String nothingFound = getString(R.string.search_no_results) + "\n\n";
+                        if (!title.trim().equals("")) {
+                            nothingFound += getString(R.string.search_no_results_title, title) + "\n";
+                        }
+                        if (!author.trim().equals("")) {
+                            nothingFound += getString(R.string.search_no_results_author, author);
+                        }
+                        loadingView.setText(nothingFound);
                     }
                 } catch (JSONException e) {
                     // Nothing to do here
