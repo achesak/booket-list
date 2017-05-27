@@ -128,8 +128,9 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/detail_page_count"
                     android:layout_alignBottom="@+id/detail_page_count"
-                    android:layout_alignRight="@+id/detail_page_count"
-                    android:src="@drawable/ic_checked" />
+                    android:layout_alignEnd="@+id/detail_page_count"
+                    android:src="@drawable/ic_checked"
+                    android:contentDescription="@string/detail_update_pages_button" />
 
             </RelativeLayout>
 
