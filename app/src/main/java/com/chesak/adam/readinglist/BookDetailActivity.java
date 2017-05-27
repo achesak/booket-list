@@ -62,6 +62,8 @@ public class BookDetailActivity extends AppCompatActivity {
                 new DownloadImageTask(detailCover, book.getImageUrl()).execute(book.getImageUrl());
             }
             detailCover.setBackgroundResource(0);
+        } else if (source == ReadingListConstants.SOURCE_FINISHED) {
+            detailCover.setBackgroundResource(R.drawable.ic_book_closed_new);
         }
         detailTitle.setText(book.getTitle());
         detailAuthor.setText(book.getAuthor());
