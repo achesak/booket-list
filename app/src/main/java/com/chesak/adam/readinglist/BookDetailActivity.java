@@ -30,7 +30,7 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        ImageView detailCover = (ImageView) findViewById(R.id.detail_cover);
+        final ImageView detailCover = (ImageView) findViewById(R.id.detail_cover);
         TextView detailTitle = (TextView) findViewById(R.id.detail_title);
         TextView detailAuthor = (TextView) findViewById(R.id.detail_author);
         TextView detailPublisher = (TextView) findViewById(R.id.detail_publisher);
@@ -126,7 +126,7 @@ public class BookDetailActivity extends AppCompatActivity {
         detailPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updatePageCount(book, position, source, detailPageCount, detailProgress, detailDays);
+                updatePageCount(book, position, source, detailPageCount, detailProgress, detailDays, detailCover);
             }
         });
 
@@ -171,7 +171,7 @@ public class BookDetailActivity extends AppCompatActivity {
      * @param detailProgress text view for progress
      * @param detailDays text view for days
      */
-    private void updatePageCount(Book book, int position, int source, EditText detailPageCount, TextView detailProgress, TextView detailDays) {
+    private void updatePageCount(Book book, int position, int source, EditText detailPageCount, TextView detailProgress, TextView detailDays, ImageView detailCover) {
         int originalPagesRead = book.getPageRead();
 
         // Get the new pages read input
@@ -195,6 +195,15 @@ public class BookDetailActivity extends AppCompatActivity {
         } else {
             int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
             detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+        }
+
+        // Change the book icon if necessary
+        if (book.getImageUrl().equals("")) {
+            if (pagesRead == book.getPageCount()) {
+                detailCover.setImageResource(R.drawable.ic_book_closed_new);
+            } else {
+                detailCover.setImageResource(R.drawable.ic_book_open_new);
+            }
         }
 
         // Set the pages read
