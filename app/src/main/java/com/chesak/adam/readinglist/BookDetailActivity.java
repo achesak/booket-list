@@ -63,7 +63,7 @@ public class BookDetailActivity extends AppCompatActivity {
             }
             detailCover.setBackgroundResource(0);
         } else if (source == ReadingListConstants.SOURCE_FINISHED) {
-            detailCover.setBackgroundResource(R.drawable.ic_book_closed_new);
+            detailCover.setImageResource(R.drawable.ic_book_closed_new);
         }
 
         // Set the title, author, and publisher
