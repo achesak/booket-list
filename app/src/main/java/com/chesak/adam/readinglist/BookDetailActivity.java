@@ -126,7 +126,7 @@ public class BookDetailActivity extends AppCompatActivity {
         detailPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updatePageCount(book, position, source, detailPageCount, detailProgress, detailDays, detailCover);
+                updatePageCount(book, position, source, detailPageCount);
             }
         });
 
@@ -168,10 +168,8 @@ public class BookDetailActivity extends AppCompatActivity {
      * @param position position
      * @param source source list
      * @param detailPageCount edit text to get page count from
-     * @param detailProgress text view for progress
-     * @param detailDays text view for days
      */
-    private void updatePageCount(Book book, int position, int source, EditText detailPageCount, TextView detailProgress, TextView detailDays, ImageView detailCover) {
+    private void updatePageCount(Book book, int position, int source, EditText detailPageCount) {
         int originalPagesRead = book.getPageRead();
 
         // Get the new pages read input
