@@ -189,8 +189,13 @@ final public class BookList implements Serializable {
      * @param index index in list
      */
     public void moveToFinished(int index) {
-        finishedList.add(list.remove(index));
-        sortFinished();
+        try {
+            finishedList.add(list.remove(index));
+            sortFinished();
+        } catch (IndexOutOfBoundsException e) {
+            // Do nothing
+        }
+
     }
 
 
@@ -199,8 +204,12 @@ final public class BookList implements Serializable {
      * @param index index in list
      */
     public void moveToReading(int index) {
-        list.add(finishedList.remove(index));
-        sort();
+        try {
+            list.add(finishedList.remove(index));
+            sort();
+        } catch (IndexOutOfBoundsException e){
+            // Do nothing
+        }
     }
 
 

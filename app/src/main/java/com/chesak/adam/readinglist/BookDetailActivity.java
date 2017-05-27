@@ -187,25 +187,6 @@ public class BookDetailActivity extends AppCompatActivity {
             pagesRead = 0;
         }
 
-        // Update the other details page
-        String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
-        detailProgress.setText(progress);
-        if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
-            detailDays.setVisibility(View.GONE);
-        } else {
-            int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
-            detailDays.setText(getString(R.string.detail_days, daysRemaining, daysRemaining == 1 ? "" : "s", MainActivity.settings.pageRate));
-        }
-
-        // Change the book icon if necessary
-        if (book.getImageUrl().equals("")) {
-            if (pagesRead == book.getPageCount()) {
-                detailCover.setImageResource(R.drawable.ic_book_closed);
-            } else {
-                detailCover.setImageResource(R.drawable.ic_book_open);
-            }
-        }
-
         // Set the pages read
         book.setPageRead(pagesRead);
         if (originalPagesRead != book.getPageCount()) {
@@ -221,5 +202,9 @@ public class BookDetailActivity extends AppCompatActivity {
             MainActivity.bookList.moveToReading(position);
         }
         MainActivity.io.saveData(BookDetailActivity.this);
+
+        // Switch to the main activity
+        Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }
