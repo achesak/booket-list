@@ -17,6 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Shows the book details
@@ -44,6 +46,7 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView detailIsbn = (TextView) findViewById(R.id.detail_isbn);
 
         final EditText detailPageCount = (EditText) findViewById(R.id.detail_page_count);
+        final ImageView detailPageButton = (ImageView) findViewById(R.id.detail_page_count_button);
         Button removeButton = (Button) findViewById(R.id.detail_remove);
 
         // Get the selected book.
@@ -95,6 +98,8 @@ public class BookDetailActivity extends AppCompatActivity {
             detailIsbn.setText(getString(R.string.detail_isbn,book.getIsbn()));
         }
 
+        detailPageCount.setText(String.format(Locale.US, "%d", book.getPageRead()));
+
         // Save book details on rating change
         detailRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -109,58 +114,10 @@ public class BookDetailActivity extends AppCompatActivity {
         });
 
         // Update page count on text change
-        detailPageCount.addTextChangedListener(new TextWatcher() {
+        detailPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int originalPagesRead = book.getPageRead();
-
-                // Get the new pages read input
-                String pagesReadInput = detailPageCount.getText().toString().trim();
-                if (pagesReadInput.equals("")) {
-                    return;
-                }
-                int pagesRead = Integer.parseInt(pagesReadInput);
-                if (pagesRead > book.getPageCount()) {
-                    pagesRead = book.getPageCount();
-                }
-                if (pagesRead < 0) {
-                    pagesRead = 0;
-                }
-
-                // Update the other details page
-                String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
-                detailProgress.setText(progress);
-                if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
-                    detailDays.setVisibility(View.GONE);
-                } else {
-                    int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
-                    detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
-                }
-
-                // Set the pages read
-                book.setPageRead(pagesRead);
-                if (originalPagesRead != book.getPageCount()) {
-                    MainActivity.bookList.get(position).setPageRead(pagesRead);
-                } else {
-                    MainActivity.bookList.getFinished(position).setPageRead(pagesRead);
-                }
-
-                // Move to other list as needed
-                if (pagesRead == book.getPageCount()) {
-                    MainActivity.bookList.moveToFinished(position);
-                } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
-                    MainActivity.bookList.moveToReading(position);
-                }
+            public void onClick(View view) {
+                updatePageCount(book, position, source, detailPageCount, detailProgress, detailDays);
             }
         });
 
@@ -192,5 +149,59 @@ public class BookDetailActivity extends AppCompatActivity {
                         .create().show();
             }
         });
+    }
+
+
+    /**
+     * Updates the page count
+     *
+     * @param book book
+     * @param position position
+     * @param source source list
+     * @param detailPageCount edit text to get page count from
+     * @param detailProgress text view for progress
+     * @param detailDays text view for days
+     */
+    private void updatePageCount(Book book, int position, int source, EditText detailPageCount, TextView detailProgress, TextView detailDays) {
+        int originalPagesRead = book.getPageRead();
+
+        // Get the new pages read input
+        String pagesReadInput = detailPageCount.getText().toString().trim();
+        if (pagesReadInput.equals("")) {
+            return;
+        }
+        int pagesRead = Integer.parseInt(pagesReadInput);
+        if (pagesRead > book.getPageCount()) {
+            pagesRead = book.getPageCount();
+        }
+        if (pagesRead < 0) {
+            pagesRead = 0;
+        }
+
+        // Update the other details page
+        String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
+        detailProgress.setText(progress);
+        if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
+            detailDays.setVisibility(View.GONE);
+        } else {
+            int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
+            detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+        }
+
+        // Set the pages read
+        book.setPageRead(pagesRead);
+        if (originalPagesRead != book.getPageCount()) {
+            MainActivity.bookList.get(position).setPageRead(pagesRead);
+        } else {
+            MainActivity.bookList.getFinished(position).setPageRead(pagesRead);
+        }
+
+        // Move to other list as needed
+        if (pagesRead == book.getPageCount()) {
+            MainActivity.bookList.moveToFinished(position);
+        } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
+            MainActivity.bookList.moveToReading(position);
+        }
+        MainActivity.io.saveData(BookDetailActivity.this);
     }
 }

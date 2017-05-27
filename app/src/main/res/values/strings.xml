@@ -53,6 +53,7 @@
     <string name="detail_isbn">ISBN: %1$s</string>
     <string name="detail_no_synopsis">No description provided</string>
     <string name="detail_no_isbn">No ISBN provided</string>
+    <string name="detail_update_pages_button">Update pages read</string>
     <string name="detail_update_pages_text">Pages read</string>
     <string name="detail_remove_button">Remove book</string>
 

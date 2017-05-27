@@ -107,14 +107,31 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <EditText
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/detail_page_count"
-                android:layout_weight="1"
-                android:hint="@string/detail_update_pages_text" />
+                android:layout_weight="1" >
+
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/detail_page_count"
+                    android:hint="@string/detail_update_pages_text"
+                    android:layout_width="fill_parent" />
+
+                <ImageView
+                    android:id="@+id/detail_page_count_button"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/detail_page_count"
+                    android:layout_alignBottom="@+id/detail_page_count"
+                    android:layout_alignRight="@+id/detail_page_count"
+                    android:src="@drawable/ic_checked" />
+
+            </RelativeLayout>
 
             <Button
                 android:layout_width="52dp"
