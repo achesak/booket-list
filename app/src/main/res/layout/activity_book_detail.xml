@@ -19,7 +19,7 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
 
         <ImageView
             android:id="@+id/detail_cover"
-            android:src="@drawable/ic_book_open_new"
+            android:src="@drawable/ic_book_open"
             android:layout_width="192dp"
             android:layout_height="192dp"
             android:contentDescription="@string/detail_cover_placeholder" />

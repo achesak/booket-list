@@ -15,7 +15,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
         android:scaleType="centerInside"
-        android:background="@drawable/ic_book_closed_new"
+        android:background="@drawable/ic_book_closed"
         android:contentDescription="@string/detail_cover_placeholder" />
 
     <RelativeLayout
@@ -30,7 +30,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_book_open_new"
+            app:srcCompat="@drawable/ic_book_open"
             android:layout_marginStart="8dp"
             android:id="@+id/list_book_icon"
             android:contentDescription="@string/detail_progress_placeholder" />

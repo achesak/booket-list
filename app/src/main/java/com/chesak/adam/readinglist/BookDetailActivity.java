@@ -63,7 +63,7 @@ public class BookDetailActivity extends AppCompatActivity {
             }
             detailCover.setBackgroundResource(0);
         } else if (source == ReadingListConstants.SOURCE_FINISHED) {
-            detailCover.setImageResource(R.drawable.ic_book_closed_new);
+            detailCover.setImageResource(R.drawable.ic_book_closed);
         }
 
         // Set the title, author, and publisher
@@ -200,9 +200,9 @@ public class BookDetailActivity extends AppCompatActivity {
         // Change the book icon if necessary
         if (book.getImageUrl().equals("")) {
             if (pagesRead == book.getPageCount()) {
-                detailCover.setImageResource(R.drawable.ic_book_closed_new);
+                detailCover.setImageResource(R.drawable.ic_book_closed);
             } else {
-                detailCover.setImageResource(R.drawable.ic_book_open_new);
+                detailCover.setImageResource(R.drawable.ic_book_open);
             }
         }
 

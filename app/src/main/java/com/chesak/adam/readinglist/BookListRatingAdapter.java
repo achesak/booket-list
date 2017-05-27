@@ -70,7 +70,7 @@ public class BookListRatingAdapter extends BaseAdapter {
         ratingElement.setRating(book.getUserRating());
 
         if (book.isFinishedReading()) {
-            iconElement.setImageResource(R.drawable.ic_book_closed_new);
+            iconElement.setImageResource(R.drawable.ic_book_closed);
         }
 
         // Set the image

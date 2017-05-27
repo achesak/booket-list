@@ -14,7 +14,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
         android:scaleType="centerInside"
-        android:background="@drawable/ic_book_closed_new" />
+        android:background="@drawable/ic_book_closed"
+        android:contentDescription="@string/detail_cover_placeholder"/>
 
     <TextView
         android:id="@+id/list_book_pages"
