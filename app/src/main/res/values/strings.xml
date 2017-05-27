@@ -48,7 +48,7 @@
     <string name="detail_started_placeholder">Added 01/01/2000</string>
     <string name="detail_synopsis_placeholder">Description goes here</string>
     <string name="detail_isbn_placeholder">ISBN: 111111111111</string>
-    <string name="detail_days">%1$d days remaining (%2$d pages per day)</string>
+    <string name="detail_days">%1$d day%2$s remaining (%3$d pages per day)</string>
     <string name="detail_started">Added %1$s</string>
     <string name="detail_isbn">ISBN: %1$s</string>
     <string name="detail_no_synopsis">No description provided</string>

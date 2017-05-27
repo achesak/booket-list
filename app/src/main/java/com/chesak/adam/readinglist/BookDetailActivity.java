@@ -85,7 +85,7 @@ public class BookDetailActivity extends AppCompatActivity {
             detailDays.setVisibility(View.GONE);
         } else {
             int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
-            detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+            detailDays.setText(getString(R.string.detail_days, daysRemaining, daysRemaining == 1 ? "" : "s", MainActivity.settings.pageRate));
         }
         detailStarted.setText(getString(R.string.detail_started, book.getStartedReadingFormatted()));
 
@@ -194,7 +194,7 @@ public class BookDetailActivity extends AppCompatActivity {
             detailDays.setVisibility(View.GONE);
         } else {
             int daysRemaining = (book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate;
-            detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
+            detailDays.setText(getString(R.string.detail_days, daysRemaining, daysRemaining == 1 ? "" : "s", MainActivity.settings.pageRate));
         }
 
         // Change the book icon if necessary
