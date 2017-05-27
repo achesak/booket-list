@@ -90,8 +90,7 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             android:numStars="5"
             android:stepSize="0.5"
             android:layout_marginTop="10dp"
-            style="@style/Widget.AppCompat.RatingBar"
-            android:rating="3" />
+            style="@style/Widget.AppCompat.RatingBar" />
 
         <TextView
             android:text="@string/detail_isbn_placeholder"
