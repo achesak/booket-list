@@ -45,7 +45,7 @@ public class BookDetailActivity extends AppCompatActivity {
         final ImageView detailPageButton = (ImageView) findViewById(R.id.detail_page_count_button);
         Button removeButton = (Button) findViewById(R.id.detail_remove);
 
-        // Get the selected book.
+        // Get the selected book
         final int position = getIntent().getIntExtra("position", 0);
         final int source = getIntent().getIntExtra("source", 0);
         final Book book = (Book) getIntent().getSerializableExtra("book");
@@ -53,7 +53,7 @@ public class BookDetailActivity extends AppCompatActivity {
         // Set the action bar details
         setTitle(book.getTitle());
 
-        // Set the fields
+        // Set the cover
         if (!book.getImageUrl().equals("")) {
             Bitmap image = OpenLibraryClient.getImage(book.getImageUrl());
             if (image != null) {
@@ -65,6 +65,8 @@ public class BookDetailActivity extends AppCompatActivity {
         } else if (source == ReadingListConstants.SOURCE_FINISHED) {
             detailCover.setBackgroundResource(R.drawable.ic_book_closed_new);
         }
+
+        // Set the title, author, and publisher
         detailTitle.setText(book.getTitle());
         detailAuthor.setText(book.getAuthor());
         String publisher = "No publisher provided";
@@ -75,6 +77,8 @@ public class BookDetailActivity extends AppCompatActivity {
             publisher += ", " + book.getPublishDate();
         }
         detailPublisher.setText(publisher);
+
+        // Set the reading progress, days remaining, and start date
         String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
         detailProgress.setText(progress);
         if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
@@ -84,18 +88,25 @@ public class BookDetailActivity extends AppCompatActivity {
             detailDays.setText(getString(R.string.detail_days, daysRemaining, MainActivity.settings.pageRate));
         }
         detailStarted.setText(getString(R.string.detail_started, book.getStartedReadingFormatted()));
+
+        // Set the synopsis
         if (book.getSynopsis().equals("")) {
             detailSynopsis.setText(R.string.detail_no_synopsis);
         } else {
             detailSynopsis.setText(book.getSynopsis());
         }
+
+        // Set the rating
         detailRating.setRating(book.getUserRating());
+
+        // Set the ISBN
         if (book.getIsbn().equals("")) {
             detailIsbn.setText(R.string.detail_no_isbn);
         } else {
             detailIsbn.setText(getString(R.string.detail_isbn,book.getIsbn()));
         }
 
+        // Fill the page count entry
         detailPageCount.setText(String.format(Locale.US, "%d", book.getPageRead()));
 
         // Save book details on rating change
