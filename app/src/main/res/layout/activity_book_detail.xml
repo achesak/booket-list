@@ -90,7 +90,8 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             android:numStars="5"
             android:stepSize="0.5"
             android:layout_marginTop="10dp"
-            style="@style/Widget.AppCompat.RatingBar" />
+            style="@style/Widget.AppCompat.RatingBar"
+            android:rating="3" />
 
         <TextView
             android:text="@string/detail_isbn_placeholder"
@@ -135,11 +136,11 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             </RelativeLayout>
 
             <Button
-                android:layout_width="52dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/detail_remove"
                 tools:ignore="ButtonStyle"
-                android:background="@android:drawable/ic_menu_delete" />
+                android:background="@drawable/ic_trash"
+                android:layout_width="48dp"
+                android:layout_height="36dp" />
 
         </LinearLayout>
 
