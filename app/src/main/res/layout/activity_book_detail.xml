@@ -52,7 +52,7 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             android:fontFamily="sans-serif" />
 
         <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/detail_progress_bar"
