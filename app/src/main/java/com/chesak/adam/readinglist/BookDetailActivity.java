@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -34,7 +35,8 @@ public class BookDetailActivity extends AppCompatActivity {
         TextView detailTitle = (TextView) findViewById(R.id.detail_title);
         TextView detailAuthor = (TextView) findViewById(R.id.detail_author);
         TextView detailPublisher = (TextView) findViewById(R.id.detail_publisher);
-        final TextView detailProgress = (TextView) findViewById(R.id.detail_progess);
+        ProgressBar detailProgressBar = (ProgressBar) findViewById(R.id.detail_progress_bar);
+        final TextView detailProgressText = (TextView) findViewById(R.id.detail_progess_text);
         final TextView detailDays = (TextView) findViewById(R.id.detail_days);
         TextView detailStarted = (TextView) findViewById(R.id.detail_started);
         TextView detailSynopsis = (TextView) findViewById(R.id.detail_synopsis);
@@ -79,8 +81,10 @@ public class BookDetailActivity extends AppCompatActivity {
         detailPublisher.setText(publisher);
 
         // Set the reading progress, days remaining, and start date
+        detailProgressBar.setMax(book.getPageCount());
+        detailProgressBar.setProgress(book.getPageRead());
         String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
-        detailProgress.setText(progress);
+        detailProgressText.setText(progress);
         if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
             detailDays.setVisibility(View.GONE);
         } else {

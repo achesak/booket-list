@@ -51,11 +51,18 @@ tools:context="com.chesak.adam.readinglist.BookDetailActivity">
             android:textAlignment="center"
             android:fontFamily="sans-serif" />
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_progress_bar"
+            android:layout_marginTop="10dp" />
+
         <TextView
             android:text="@string/detail_progress_placeholder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/detail_progess"
+            android:id="@+id/detail_progess_text"
             android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
             android:textAlignment="center"
             android:layout_marginTop="10dp" />
