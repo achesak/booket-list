@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -42,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
 
         final ListView listView = (ListView) findViewById(R.id.list_search);
         final TextView loadingView = (TextView) findViewById(R.id.search_loading_filler);
+        final ProgressBar loadingIndicator = (ProgressBar) findViewById(R.id.search_loading_indicator);
 
         OpenLibraryClient.getSearch(title, author, null, new JsonHttpResponseHandler() {
             @Override
@@ -52,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     if (response.getJSONArray("docs").length() != 0) {
                         loadingView.setVisibility(View.GONE);
+                        loadingIndicator.setVisibility(View.GONE);
 
                         data = response.getJSONArray("docs");
                         BookListSearchAdapter adapter = new BookListSearchAdapter(SearchActivity.this, response.getJSONArray("docs"));

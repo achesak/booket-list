@@ -13,6 +13,13 @@
         android:textSize="16sp"
         android:layout_marginTop="10dp" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_loading_indicator"
+        android:layout_marginTop="10dp" />
+
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
