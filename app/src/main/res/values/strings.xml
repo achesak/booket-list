@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Reading List</string>
+    <string name="app_name">Booket List</string>
 
     <!-- Activity titles -->
     <string name="title_main">Current books</string>
@@ -8,7 +8,7 @@
     <string name="title_lowest_rated">Lowest rated</string>
     <string name="title_progress">Book progress</string>
     <string name="title_search">Search</string>
-    <string name="title_settings">Settings</string>
+    <string name="title_settings">Settings and credits</string>
 
     <!-- Main screen menu -->
     <string name="action_view_finished">Finished books</string>
