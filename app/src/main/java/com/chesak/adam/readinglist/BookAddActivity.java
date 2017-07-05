@@ -24,6 +24,12 @@ public class BookAddActivity extends AppCompatActivity {
         final EditText titleText = (EditText) findViewById(R.id.add_book_title);
         final EditText authorText = (EditText) findViewById(R.id.add_book_author);
 
+        // Fill the fields
+        if (MainActivity.settings.rememberLastSearch) {
+            titleText.setText(MainActivity.lastSearchTitle);
+            authorText.setText(MainActivity.lastSearchAuthor);
+        }
+
         // Set the action bar details
         setTitle(R.string.title_add);
 
@@ -41,6 +47,9 @@ public class BookAddActivity extends AppCompatActivity {
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
                 }
+
+                MainActivity.lastSearchTitle = title;
+                MainActivity.lastSearchAuthor = author;
 
                 Intent addIntent = new Intent(BookAddActivity.this, SearchActivity.class);
                 addIntent.putExtra("title", title);

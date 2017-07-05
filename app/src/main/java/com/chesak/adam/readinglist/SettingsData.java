@@ -11,7 +11,8 @@ final public class SettingsData implements Serializable {
 
 
     // Settings fields:
-    public int pageRate;
+    public int pageRate = 0;
+    public boolean rememberLastSearch = true;
 
 
     /**
@@ -19,6 +20,7 @@ final public class SettingsData implements Serializable {
      */
     public SettingsData() {
         this.pageRate = 0;
+        this.rememberLastSearch = true;
     }
 
 }

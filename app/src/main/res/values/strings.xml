@@ -60,10 +60,12 @@
     <!-- Settings screen -->
     <string name="settings_page_rate_title">Reading speed</string>
     <string name="settings_page_rate">Pages per day</string>
-    <string name="settings_data_title">Data</string>
-    <string name="settings_data_reading">Currently reading</string>
-    <string name="settings_data_finished">Finished</string>
-    <string name="settings_data_all">Everything</string>
+    <string name="settings_search_title">Search</string>
+    <string name="settings_search_remember">Remember last search</string>
+    <string name="settings_data_title">Clear data</string>
+    <string name="settings_data_reading">Clear currently reading</string>
+    <string name="settings_data_finished">Clear finished</string>
+    <string name="settings_data_all">Clear verything</string>
     <string name="settings_data_clear_button">Clear data</string>
     <string name="settings_credits_title">Credits</string>
     <string name="settings_credits_icons">Icons designed by Freepik from Flaticon</string>

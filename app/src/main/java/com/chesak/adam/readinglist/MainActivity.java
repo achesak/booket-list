@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public static SettingsData settings = new SettingsData();
     public static BookList bookList = new BookList();
     final public static HashMap<String, Object> imageCache = new HashMap<>();
+    public static String lastSearchTitle = "";
+    public static String lastSearchAuthor = "";
 
     // UI elements:
     private BookListAdapter adapter;

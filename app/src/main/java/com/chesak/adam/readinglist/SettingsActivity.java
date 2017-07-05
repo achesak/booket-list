@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 
 import java.util.Locale;
 
@@ -29,11 +30,17 @@ public class SettingsActivity extends AppCompatActivity {
         // Set the action bar details
         setTitle(R.string.title_settings);
 
-        // Update page rate
+        // Get the widgets
         final EditText pageRateText = (EditText) findViewById(R.id.settings_page_rate);
+        final Switch rememberLastSearch = (Switch) findViewById(R.id.settings_search_remember);
+
+        // Set the current values
         if (MainActivity.settings.pageRate > 0) {
             pageRateText.setText(String.format(Locale.US, "%d", MainActivity.settings.pageRate));
         }
+        rememberLastSearch.setChecked(MainActivity.settings.rememberLastSearch);
+
+        // Update page rate
         pageRateText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
