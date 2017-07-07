@@ -1,20 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.chesak.adam.readinglist.activity_main.MainActivity">
-    <item
-        android:title="@string/action_view_progress"
-        android:orderInCategory="101"
-        android:id="@+id/action_view_progress" />
     <item
         android:id="@+id/action_view_rating"
         android:title="@string/action_view_rating"
-        android:orderInCategory="102" />
+        android:icon="@drawable/ic_menu_rating"
+        app:showAsAction="ifRoom" />
+    <item
+        android:title="@string/action_view_progress"
+        android:id="@+id/action_view_progress"
+        android:icon="@drawable/ic_menu_progress"
+        app:showAsAction="ifRoom" />
     <item
         android:title="@string/action_view_random"
-        android:orderInCategory="104"
-        android:id="@+id/action_view_random" />
+        android:id="@+id/action_view_random"
+        android:icon="@drawable/ic_menu_random"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="105"
-        android:title="@string/action_settings" />
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_menu_settings"
+        app:showAsAction="ifRoom" />
 </menu>
