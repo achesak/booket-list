@@ -147,7 +147,13 @@ public class SearchActivity extends AppCompatActivity {
                 if (bookData == null) {
                     new AlertDialog.Builder(SearchActivity.this)
                             .setTitle(R.string.search_no_book_title).setMessage(R.string.search_no_book)
-                            .setIcon(android.R.drawable.ic_dialog_alert).show();
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing
+                                }
+                            }).show();
                     return;
                 }
 

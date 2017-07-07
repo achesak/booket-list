@@ -1,5 +1,6 @@
 package com.chesak.adam.readinglist.activity_add;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -52,7 +53,13 @@ public class AddActivity extends AppCompatActivity {
                 if (title.equals("") && author.equals("")) {
                     new AlertDialog.Builder(AddActivity.this)
                             .setTitle(R.string.add_book_no_entry_title).setMessage(R.string.add_book_no_entry)
-                            .setIcon(android.R.drawable.ic_dialog_alert).show();
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing
+                                }
+                            }).show();
                     return;
                 }
 

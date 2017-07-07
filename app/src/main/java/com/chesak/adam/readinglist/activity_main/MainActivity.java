@@ -1,5 +1,6 @@
 package com.chesak.adam.readinglist.activity_main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -139,7 +140,13 @@ public class MainActivity extends AppCompatActivity {
                 if (bookData == null) {
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle(R.string.action_view_random).setMessage(R.string.action_view_random_none)
-                            .setIcon(android.R.drawable.ic_dialog_alert).show();
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing
+                                }
+                            }).show();
                     return false;
                 }
                 Intent randomIntent = new Intent(MainActivity.this, DetailActivity.class);
