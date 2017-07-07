@@ -15,8 +15,7 @@ import android.widget.ListView;
 import com.chesak.adam.readinglist.activity_add.AddActivity;
 import com.chesak.adam.readinglist.activity_progress.ProgressActivity;
 import com.chesak.adam.readinglist.R;
-import com.chesak.adam.readinglist.activity_rating.RatingHighestActivity;
-import com.chesak.adam.readinglist.activity_rating.RatingLowestActivity;
+import com.chesak.adam.readinglist.activity_rating.RatingActivity;
 import com.chesak.adam.readinglist.activity_detail.DetailActivity;
 import com.chesak.adam.readinglist.activity_finished.FinishedActivity;
 import com.chesak.adam.readinglist.activity_settings.SettingsActivity;
@@ -127,13 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent finishedIntent = new Intent(MainActivity.this, FinishedActivity.class);
                 startActivity(finishedIntent);
                 return true;
-            case R.id.action_view_highest:
-                Intent highestIntent = new Intent(MainActivity.this, RatingHighestActivity.class);
-                startActivity(highestIntent);
-                return true;
-            case R.id.action_view_lowest:
-                Intent lowestIntent = new Intent(MainActivity.this, RatingLowestActivity.class);
-                startActivity(lowestIntent);
+            case R.id.action_view_rating:
+                Intent ratingIntent = new Intent(MainActivity.this, RatingActivity.class);
+                startActivity(ratingIntent);
                 return true;
             case R.id.action_view_progress:
                 Intent progressIntent = new Intent(MainActivity.this, ProgressActivity.class);

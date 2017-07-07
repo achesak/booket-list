@@ -230,56 +230,29 @@ final public class BookList implements Serializable {
 
 
     /**
-     * Gets the 10 highest rated books
+     * Gets the highest rated books
      * @return list of books
      */
     public BookList getHighestRated() {
-        return getHighestRated(10);
-    }
-
-
-    /**
-     * Gets the 10 lowest rated books
-     * @return list of books
-     */
-    public BookList getLowestRated() {
-        return getLowestRated(10);
-    }
-
-
-    /**
-     * Gets the highest rated books
-     * @param count number of books to get
-     * @return list of books
-     */
-    public BookList getHighestRated(int count) {
         ArrayList<Book> copy = new ArrayList<>();
         copy.addAll(list);
         copy.addAll(finishedList);
         Collections.sort(copy, new HighestRatingComparator());
-        if (count > copy.size()) {
-            count = copy.size();
-        }
-        return new BookList(new ArrayList<>(copy.subList(0, count)));
+        return new BookList(copy);
     }
 
 
     /**
      * Gets the lowest rated books
-     * @param count number of books to get
      * @return list of books
      */
-    public BookList getLowestRated(int count) {
+    public BookList getLowestRated() {
         ArrayList<Book> copy = new ArrayList<>();
         copy.addAll(list);
         copy.addAll(finishedList);
         Collections.sort(copy, new LowestRatingComparator());
-        if (count > copy.size()) {
-            count = copy.size();
-        }
-        return new BookList(new ArrayList<>(copy.subList(0, count)));
+        return new BookList(copy);
     }
-
 
     /**
      * Gets the list of books sorted by progress

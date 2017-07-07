@@ -11,12 +11,9 @@
         android:orderInCategory="101"
         android:id="@+id/action_view_progress" />
     <item
-        android:id="@+id/action_view_highest"
-        android:title="@string/action_view_highest"
+        android:id="@+id/action_view_rating"
+        android:title="@string/action_view_rating"
         android:orderInCategory="102" />
-    <item android:title="@string/action_view_lowest"
-        android:id="@+id/action_view_lowest"
-        android:orderInCategory="103" />
     <item
         android:title="@string/action_view_random"
         android:orderInCategory="104"

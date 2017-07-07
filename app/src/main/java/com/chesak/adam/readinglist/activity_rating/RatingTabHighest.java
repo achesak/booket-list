@@ -1,12 +1,13 @@
 package com.chesak.adam.readinglist.activity_rating;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -16,28 +17,25 @@ import com.chesak.adam.readinglist.activity_main.MainActivity;
 import com.chesak.adam.readinglist.data.BookData;
 import com.chesak.adam.readinglist.data.BookList;
 
+
 /**
- * Shows the lowest rated books
+ * Rating view: highest rated
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class RatingLowestActivity extends AppCompatActivity {
+public class RatingTabHighest extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rating);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.tab_rating_high, container, false);
 
-        // Set the action bar details
-        setTitle(R.string.title_lowest_rated);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ListView listView = (ListView) view.findViewById(R.id.listview_rating_high);
 
-        final BookList lowestRated = MainActivity.bookList.getLowestRated();
+        final BookList highestRated = MainActivity.bookList.getHighestRated();
+        final Context context = view.getContext();
 
         // Display the book list
-        ListView listView = (ListView) findViewById(R.id.list_rating);
-        BookListRatingAdapter adapter = new BookListRatingAdapter(this, lowestRated);
+        BookListRatingAdapter adapter = new BookListRatingAdapter(context, highestRated);
         listView.setAdapter(adapter);
 
         // Show book details on click
@@ -45,32 +43,22 @@ public class RatingLowestActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                BookData selectedBookData = MainActivity.bookList.getIndex(lowestRated.get(position));
+                BookData selectedBookData = MainActivity.bookList.getIndex(highestRated.get(position));
                 if (selectedBookData == null) {
-                    new AlertDialog.Builder(RatingLowestActivity.this)
+                    new AlertDialog.Builder(context)
                             .setTitle(R.string.rating_not_found_title).setMessage(R.string.rating_not_found)
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
                 }
 
-                Intent detailIntent = new Intent(RatingLowestActivity.this, DetailActivity.class);
+                Intent detailIntent = new Intent(context, DetailActivity.class);
                 detailIntent.putExtra("position", selectedBookData.getIndex());
                 detailIntent.putExtra("book", selectedBookData.getBook());
                 detailIntent.putExtra("source", selectedBookData.getSource());
                 startActivity(detailIntent);
             }
         });
-    }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return view;
     }
 }

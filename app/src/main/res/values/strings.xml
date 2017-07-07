@@ -4,8 +4,7 @@
     <!-- Activity titles -->
     <string name="title_main">Current books</string>
     <string name="title_add">Add book</string>
-    <string name="title_highest_rated">Highest rated</string>
-    <string name="title_lowest_rated">Lowest rated</string>
+    <string name="title_rating">Book ratings</string>
     <string name="title_progress">Book progress</string>
     <string name="title_search">Search</string>
     <string name="title_settings">Settings and credits</string>
@@ -13,8 +12,7 @@
     <!-- Main screen menu -->
     <string name="action_view_finished">Finished books</string>
     <string name="action_view_progress">Book progress</string>
-    <string name="action_view_highest">Highest rated</string>
-    <string name="action_view_lowest">Lowest rated</string>
+    <string name="action_view_rating">Book ratings</string>
     <string name="action_view_random">Random book</string>
     <string name="action_settings">Settings</string>
 
@@ -56,6 +54,10 @@
     <string name="detail_update_pages_button">Update pages read</string>
     <string name="detail_update_pages_text">Pages read</string>
     <string name="detail_remove_button">Remove book</string>
+
+    <!-- Ratings screen -->
+    <string name="rating_tab_highest">Highest rated</string>
+    <string name="rating_tab_lowest">Lowest rated</string>
 
     <!-- Settings screen -->
     <string name="settings_page_rate_title">Reading speed</string>

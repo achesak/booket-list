@@ -71,7 +71,7 @@ public class BookListRatingAdapter extends BaseAdapter {
             author = book.getAuthor().split("\n")[0] + " et al.";
         }
 
-        titleElement.setText(book.getTitle());
+        titleElement.setText("" + (position + 1) + ". " + book.getTitle());
         authorElement.setText(author);
         ratingElement.setRating(book.getUserRating());
 
