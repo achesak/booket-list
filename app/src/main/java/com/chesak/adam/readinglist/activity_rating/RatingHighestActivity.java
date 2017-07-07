@@ -2,8 +2,10 @@ package com.chesak.adam.readinglist.activity_rating;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,6 +31,7 @@ public class RatingHighestActivity extends AppCompatActivity {
 
         // Set the action bar details
         setTitle(R.string.title_highest_rated);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final BookList highestRated = MainActivity.bookList.getHighestRated();
 
@@ -57,5 +60,17 @@ public class RatingHighestActivity extends AppCompatActivity {
                 startActivity(detailIntent);
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

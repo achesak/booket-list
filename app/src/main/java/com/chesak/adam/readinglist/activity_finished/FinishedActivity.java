@@ -1,8 +1,10 @@
 package com.chesak.adam.readinglist.activity_finished;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,6 +27,7 @@ public class FinishedActivity extends AppCompatActivity {
 
         // Set the action bar details
         setTitle("Finished books");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Display the book list
         BookListFinishedAdapter adapter = new BookListFinishedAdapter(this, MainActivity.bookList);
@@ -43,5 +46,17 @@ public class FinishedActivity extends AppCompatActivity {
                 startActivity(detailIntent);
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

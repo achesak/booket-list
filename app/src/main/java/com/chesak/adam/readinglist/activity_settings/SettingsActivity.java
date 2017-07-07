@@ -2,10 +2,12 @@ package com.chesak.adam.readinglist.activity_settings;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Set the action bar details
         setTitle(R.string.title_settings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get the widgets
         final EditText pageRateText = (EditText) findViewById(R.id.settings_page_rate);
@@ -114,5 +117,17 @@ public class SettingsActivity extends AppCompatActivity {
                         .create().show();
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

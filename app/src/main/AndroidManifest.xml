@@ -22,15 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detail.DetailActivity" />
-        <activity android:name=".activity_add.AddActivity" />
-        <activity android:name=".activity_add_manual.AddManualActivity" />
-        <activity android:name=".activity_rating.RatingHighestActivity" />
-        <activity android:name=".activity_rating.RatingLowestActivity" />
-        <activity android:name=".activity_finished.FinishedActivity" />
-        <activity android:name=".activity_settings.SettingsActivity" />
-        <activity android:name=".activity_search.SearchActivity" />
-        <activity android:name=".activity_progress.ProgressActivity" />
+
+        <activity android:name=".activity_detail.DetailActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_add.AddActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_add_manual.AddManualActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_add.AddActivity" />
+        </activity>
+
+        <activity android:name=".activity_rating.RatingHighestActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_rating.RatingLowestActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_finished.FinishedActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_settings.SettingsActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
+
+        <activity android:name=".activity_search.SearchActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_add.AddActivity" />
+        </activity>
+
+        <activity android:name=".activity_progress.ProgressActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity_main.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
