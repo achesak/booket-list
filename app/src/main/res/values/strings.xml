@@ -3,6 +3,7 @@
 
     <!-- Activity titles -->
     <string name="title_main">Current books</string>
+    <string name="title_finished">Finished books</string>
     <string name="title_add">Add book</string>
     <string name="title_rating">Book ratings</string>
     <string name="title_progress">Book progress</string>

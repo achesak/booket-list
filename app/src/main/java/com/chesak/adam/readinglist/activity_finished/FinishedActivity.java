@@ -26,7 +26,7 @@ public class FinishedActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_finished);
 
         // Set the action bar details
-        setTitle("Finished books");
+        setTitle(R.string.title_finished);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Display the book list
