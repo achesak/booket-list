@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_rating;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.activity_detail.DetailActivity;
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.data.BookData;
+import com.chesak.adam.readinglist.data.BookList;
 
 /**
  * Shows the highest rated books
@@ -44,7 +50,7 @@ public class RatingHighestActivity extends AppCompatActivity {
                     return;
                 }
 
-                Intent detailIntent = new Intent(RatingHighestActivity.this, BookDetailActivity.class);
+                Intent detailIntent = new Intent(RatingHighestActivity.this, DetailActivity.class);
                 detailIntent.putExtra("position", selectedBookData.getIndex());
                 detailIntent.putExtra("book", selectedBookData.getBook());
                 detailIntent.putExtra("source", selectedBookData.getSource());

@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -315,12 +315,12 @@ final public class BookList implements Serializable {
     public BookData getIndex(Book book) {
         for (int i = 0; i < list.size(); i++) {
             if (book.equals(list.get(i))) {
-                return new BookData(book, i, ReadingListConstants.SOURCE_MAIN);
+                return new BookData(book, i, Constants.SOURCE_MAIN);
             }
         }
         for (int i = 0; i < finishedList.size(); i++) {
             if (book.equals(finishedList.get(i))) {
-                return new BookData(book, i, ReadingListConstants.SOURCE_FINISHED);
+                return new BookData(book, i, Constants.SOURCE_FINISHED);
             }
         }
         return null;

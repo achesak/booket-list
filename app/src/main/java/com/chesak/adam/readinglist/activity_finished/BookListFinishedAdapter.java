@@ -1,7 +1,10 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_finished;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+
+import com.chesak.adam.readinglist.activity_main.BookListAdapter;
+import com.chesak.adam.readinglist.data.BookList;
 
 /**
  * Adapter for displaying the list of books

@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.data;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_rating;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.data.Book;
+import com.chesak.adam.readinglist.data.BookList;
+import com.chesak.adam.readinglist.shared.DownloadImageTask;
+import com.chesak.adam.readinglist.shared.OpenLibraryClient;
 
 /**
  * Adapter for displaying the list of books

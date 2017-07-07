@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity_main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,15 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookDetailActivity" />
-        <activity android:name=".BookAddActivity" />
-        <activity android:name=".BookAddManualActivity" />
-        <activity android:name=".RatingHighestActivity" />
-        <activity android:name=".RatingLowestActivity" />
-        <activity android:name=".BookFinishedActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ProgressActivity" />
+        <activity android:name=".activity_detail.DetailActivity" />
+        <activity android:name=".activity_add.AddActivity" />
+        <activity android:name=".activity_add_manual.AddManualActivity" />
+        <activity android:name=".activity_rating.RatingHighestActivity" />
+        <activity android:name=".activity_rating.RatingLowestActivity" />
+        <activity android:name=".activity_finished.FinishedActivity" />
+        <activity android:name=".activity_settings.SettingsActivity" />
+        <activity android:name=".activity_search.SearchActivity" />
+        <activity android:name=".activity_progress.ProgressActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.chesak.adam.readinglist.activity_add.AddActivity;
+import com.chesak.adam.readinglist.activity_progress.ProgressActivity;
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.activity_rating.RatingHighestActivity;
+import com.chesak.adam.readinglist.activity_rating.RatingLowestActivity;
+import com.chesak.adam.readinglist.activity_detail.DetailActivity;
+import com.chesak.adam.readinglist.activity_finished.FinishedActivity;
+import com.chesak.adam.readinglist.activity_settings.SettingsActivity;
+import com.chesak.adam.readinglist.data.Book;
+import com.chesak.adam.readinglist.data.BookData;
+import com.chesak.adam.readinglist.data.BookList;
+import com.chesak.adam.readinglist.data.Constants;
+import com.chesak.adam.readinglist.data.SettingsData;
+import com.chesak.adam.readinglist.shared.IO;
 
 import java.util.HashMap;
 
@@ -65,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Book selectedBook = bookList.get(position);
-                Intent detailIntent = new Intent(MainActivity.this, BookDetailActivity.class);
+                Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
                 detailIntent.putExtra("position", position);
                 detailIntent.putExtra("book", selectedBook);
-                detailIntent.putExtra("source", ReadingListConstants.SOURCE_MAIN);
+                detailIntent.putExtra("source", Constants.SOURCE_MAIN);
                 startActivity(detailIntent);
             }
         });
@@ -78,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addIntent = new Intent(MainActivity.this, BookAddActivity.class);
+                Intent addIntent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(addIntent);
             }
         });
@@ -109,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsIntent);
                 return true;
             case R.id.action_view_finished:
-                Intent finishedIntent = new Intent(MainActivity.this, BookFinishedActivity.class);
+                Intent finishedIntent = new Intent(MainActivity.this, FinishedActivity.class);
                 startActivity(finishedIntent);
                 return true;
             case R.id.action_view_highest:
@@ -132,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return false;
                 }
-                Intent randomIntent = new Intent(MainActivity.this, BookDetailActivity.class);
+                Intent randomIntent = new Intent(MainActivity.this, DetailActivity.class);
                 randomIntent.putExtra("book", bookData.getBook());
                 randomIntent.putExtra("position", bookData.getIndex());
-                randomIntent.putExtra("source", ReadingListConstants.SOURCE_MAIN);
+                randomIntent.putExtra("source", Constants.SOURCE_MAIN);
                 startActivity(randomIntent);
                 return true;
         }

@@ -1,9 +1,11 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.shared;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import com.chesak.adam.readinglist.activity_main.MainActivity;
 
 import java.io.InputStream;
 

@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_detail;
 
 
 import android.content.DialogInterface;
@@ -15,6 +15,13 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.data.Book;
+import com.chesak.adam.readinglist.data.Constants;
+import com.chesak.adam.readinglist.shared.DownloadImageTask;
+import com.chesak.adam.readinglist.shared.OpenLibraryClient;
+
 import java.util.Locale;
 
 /**
@@ -22,13 +29,13 @@ import java.util.Locale;
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookDetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_detail);
+        setContentView(R.layout.activity_detail);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         final ImageView detailCover = (ImageView) findViewById(R.id.detail_cover);
@@ -64,7 +71,7 @@ public class BookDetailActivity extends AppCompatActivity {
                 new DownloadImageTask(detailCover, book.getImageUrl()).execute(book.getImageUrl());
             }
             detailCover.setBackgroundResource(0);
-        } else if (source == ReadingListConstants.SOURCE_FINISHED) {
+        } else if (source == Constants.SOURCE_FINISHED) {
             detailCover.setImageResource(R.drawable.ic_book_closed);
         }
 
@@ -85,7 +92,7 @@ public class BookDetailActivity extends AppCompatActivity {
         detailProgressBar.setProgress(book.getPageRead());
         String progress = String.format(Locale.US, "%d / %d (%d%%)", book.getPageRead(), book.getPageCount(),book.getProgress());
         detailProgressText.setText(progress);
-        if (source == ReadingListConstants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
+        if (source == Constants.SOURCE_FINISHED || MainActivity.settings.pageRate < 1) {
             detailDays.setVisibility(View.GONE);
         } else {
             int daysRemaining = (int) Math.ceil(((double) book.getPageCount() - book.getPageRead()) / MainActivity.settings.pageRate);
@@ -117,12 +124,12 @@ public class BookDetailActivity extends AppCompatActivity {
         detailRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if (source == ReadingListConstants.SOURCE_MAIN) {
+                if (source == Constants.SOURCE_MAIN) {
                     MainActivity.bookList.get(position).setUserRating(rating);
-                } else if (source == ReadingListConstants.SOURCE_FINISHED) {
+                } else if (source == Constants.SOURCE_FINISHED) {
                     MainActivity.bookList.getFinished(position).setUserRating(rating);
                 }
-                MainActivity.io.saveData(BookDetailActivity.this);
+                MainActivity.io.saveData(DetailActivity.this);
             }
         });
 
@@ -138,7 +145,7 @@ public class BookDetailActivity extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(BookDetailActivity.this)
+                new AlertDialog.Builder(DetailActivity.this)
                         .setTitle(R.string.confirm_remove_book_title).setMessage(R.string.confirm_remove_book)
                         .setPositiveButton(R.string.dialog_ok,
                                 new DialogInterface.OnClickListener() {
@@ -148,8 +155,8 @@ public class BookDetailActivity extends AppCompatActivity {
                                         } else {
                                             MainActivity.bookList.removeFinished(position);
                                         }
-                                        MainActivity.io.saveData(BookDetailActivity.this);
-                                        Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
+                                        MainActivity.io.saveData(DetailActivity.this);
+                                        Intent mainIntent = new Intent(DetailActivity.this, MainActivity.class);
                                         startActivity(mainIntent);
                                     }
                                 })
@@ -202,10 +209,10 @@ public class BookDetailActivity extends AppCompatActivity {
         } else if (originalPagesRead == book.getPageCount() && pagesRead < originalPagesRead) {
             MainActivity.bookList.moveToReading(position);
         }
-        MainActivity.io.saveData(BookDetailActivity.this);
+        MainActivity.io.saveData(DetailActivity.this);
 
         // Switch to the main activity
-        Intent mainIntent = new Intent(BookDetailActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(mainIntent);
     }
 }

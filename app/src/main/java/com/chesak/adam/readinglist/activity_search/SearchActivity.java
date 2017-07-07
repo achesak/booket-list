@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_search;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.data.Book;
+import com.chesak.adam.readinglist.shared.OpenLibraryClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -18,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
-import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 

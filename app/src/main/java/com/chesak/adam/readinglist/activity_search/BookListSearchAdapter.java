@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_search;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.shared.DownloadImageTask;
+import com.chesak.adam.readinglist.shared.OpenLibraryClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;

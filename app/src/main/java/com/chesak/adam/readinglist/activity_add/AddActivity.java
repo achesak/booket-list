@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_add;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.chesak.adam.readinglist.activity_add_manual.AddManualActivity;
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.activity_search.SearchActivity;
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+
 /**
  * Shows the add book screen
  *
  * @author Adam Chesak, achesak@yahoo.com
  */
-public class BookAddActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_add);
+        setContentView(R.layout.activity_add);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         final EditText titleText = (EditText) findViewById(R.id.add_book_title);
@@ -42,7 +47,7 @@ public class BookAddActivity extends AppCompatActivity {
                 String author = authorText.getText().toString().trim();
 
                 if (title.equals("") && author.equals("")) {
-                    new AlertDialog.Builder(BookAddActivity.this)
+                    new AlertDialog.Builder(AddActivity.this)
                             .setTitle(R.string.add_book_no_entry_title).setMessage(R.string.add_book_no_entry)
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
@@ -51,7 +56,7 @@ public class BookAddActivity extends AppCompatActivity {
                 MainActivity.lastSearchTitle = title;
                 MainActivity.lastSearchAuthor = author;
 
-                Intent addIntent = new Intent(BookAddActivity.this, SearchActivity.class);
+                Intent addIntent = new Intent(AddActivity.this, SearchActivity.class);
                 addIntent.putExtra("title", title);
                 addIntent.putExtra("author", author);
                 startActivity(addIntent);
@@ -63,7 +68,7 @@ public class BookAddActivity extends AppCompatActivity {
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent manualIntent = new Intent(BookAddActivity.this, BookAddManualActivity.class);
+                Intent manualIntent = new Intent(AddActivity.this, AddManualActivity.class);
                 manualIntent.putExtra("title", titleText.getText().toString());
                 manualIntent.putExtra("author", authorText.getText().toString());
                 startActivity(manualIntent);

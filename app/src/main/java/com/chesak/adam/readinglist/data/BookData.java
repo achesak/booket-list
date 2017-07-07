@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.data;
 
 /**
  * Used to store book data for easy use between screens and contexts.

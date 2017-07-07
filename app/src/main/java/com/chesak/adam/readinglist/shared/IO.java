@@ -1,6 +1,10 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.shared;
 
 import android.content.Context;
+
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.data.BookList;
+import com.chesak.adam.readinglist.data.SettingsData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

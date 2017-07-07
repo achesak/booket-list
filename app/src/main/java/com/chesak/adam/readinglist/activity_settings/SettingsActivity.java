@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_settings;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.R;
 
 import java.util.Locale;
 

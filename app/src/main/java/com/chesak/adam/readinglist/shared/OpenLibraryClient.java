@@ -1,7 +1,8 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.shared;
 
 import android.graphics.Bitmap;
 
+import com.chesak.adam.readinglist.activity_main.MainActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

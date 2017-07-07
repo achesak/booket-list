@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist;
+package com.chesak.adam.readinglist.activity_finished;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +7,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class BookFinishedActivity extends AppCompatActivity {
+import com.chesak.adam.readinglist.activity_main.MainActivity;
+import com.chesak.adam.readinglist.R;
+import com.chesak.adam.readinglist.activity_detail.DetailActivity;
+import com.chesak.adam.readinglist.data.Book;
+import com.chesak.adam.readinglist.data.Constants;
+
+public class FinishedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_finished);
+        setContentView(R.layout.activity_finished);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         ListView listView = (ListView) findViewById(R.id.list_finished);
@@ -30,10 +36,10 @@ public class BookFinishedActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Book selectedBook = MainActivity.bookList.getFinished(position);
-                Intent detailIntent = new Intent(BookFinishedActivity.this, BookDetailActivity.class);
+                Intent detailIntent = new Intent(FinishedActivity.this, DetailActivity.class);
                 detailIntent.putExtra("position", position);
                 detailIntent.putExtra("book", selectedBook);
-                detailIntent.putExtra("source", ReadingListConstants.SOURCE_FINISHED);
+                detailIntent.putExtra("source", Constants.SOURCE_FINISHED);
                 startActivity(detailIntent);
             }
         });
