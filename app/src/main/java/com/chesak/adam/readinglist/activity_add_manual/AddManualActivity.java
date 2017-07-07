@@ -1,6 +1,5 @@
 package com.chesak.adam.readinglist.activity_add_manual;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -22,15 +21,6 @@ import com.chesak.adam.readinglist.data.Book;
  */
 public class AddManualActivity extends AppCompatActivity {
 
-    EditText titleText;
-    EditText authorText;
-    EditText pageCountText;
-    EditText publisherText;
-    EditText publishedText;
-    EditText isbnText;
-
-    private Context context = this;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +31,12 @@ public class AddManualActivity extends AppCompatActivity {
         setTitle(R.string.title_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        titleText = (EditText) findViewById(R.id.add_book_manual_title);
-        authorText = (EditText) findViewById(R.id.add_book_manual_author);
-        pageCountText = (EditText) findViewById(R.id.add_book_manual_page_count);
-        publisherText = (EditText) findViewById(R.id.add_book_manual_publisher);
-        publishedText = (EditText) findViewById(R.id.add_book_manual_published);
-        isbnText = (EditText) findViewById(R.id.add_book_manual_isbn);
+        final EditText titleText = (EditText) findViewById(R.id.add_book_manual_title);
+        final EditText authorText = (EditText) findViewById(R.id.add_book_manual_author);
+        final EditText pageCountText = (EditText) findViewById(R.id.add_book_manual_page_count);
+        final EditText publisherText = (EditText) findViewById(R.id.add_book_manual_publisher);
+        final EditText publishedText = (EditText) findViewById(R.id.add_book_manual_published);
+        final EditText isbnText = (EditText) findViewById(R.id.add_book_manual_isbn);
 
         // Fill fields from last screen.
         titleText.setText(getIntent().getStringExtra("title"));
@@ -83,7 +73,7 @@ public class AddManualActivity extends AppCompatActivity {
                 MainActivity.bookList.add(book);
                 MainActivity.io.saveData(AddManualActivity.this);
 
-                Intent viewMainIntent = new Intent(context, MainActivity.class);
+                Intent viewMainIntent = new Intent(AddManualActivity.this, MainActivity.class);
                 startActivity(viewMainIntent);
             }
         });
