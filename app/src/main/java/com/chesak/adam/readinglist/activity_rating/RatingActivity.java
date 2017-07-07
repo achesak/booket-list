@@ -16,6 +16,7 @@ public class RatingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         // Set the title
         setTitle(R.string.title_rating);
