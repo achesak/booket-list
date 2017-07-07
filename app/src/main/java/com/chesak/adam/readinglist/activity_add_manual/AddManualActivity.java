@@ -37,7 +37,7 @@ public class AddManualActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_manual);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        // Set the action bar details
+        // Set the title
         setTitle(R.string.title_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -62,10 +62,6 @@ public class AddManualActivity extends AppCompatActivity {
                 String title = titleText.getText().toString().trim();
                 String author = authorText.getText().toString().trim();
                 String pageCountInput = pageCountText.getText().toString();
-                int pageCount = Integer.parseInt(pageCountInput);
-                if (pageCount == 0) {
-                    pageCount = 1;
-                }
                 String publisher = publisherText.getText().toString().trim();
                 String published = publishedText.getText().toString();
                 String isbn = isbnText.getText().toString().trim();
@@ -75,6 +71,11 @@ public class AddManualActivity extends AppCompatActivity {
                             .setTitle(R.string.add_book_manual_no_entry_title).setMessage(R.string.add_book_manual_no_entry)
                             .setIcon(android.R.drawable.ic_dialog_alert).show();
                     return;
+                }
+
+                int pageCount = Integer.parseInt(pageCountInput);
+                if (pageCount == 0) {
+                    pageCount = 1;
                 }
 
                 // Add the book
