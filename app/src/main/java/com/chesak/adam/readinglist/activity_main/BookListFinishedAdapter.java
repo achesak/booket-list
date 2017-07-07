@@ -1,4 +1,4 @@
-package com.chesak.adam.readinglist.activity_finished;
+package com.chesak.adam.readinglist.activity_main;
 
 import android.content.Context;
 import android.view.LayoutInflater;

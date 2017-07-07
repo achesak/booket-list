@@ -4,23 +4,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.chesak.adam.readinglist.activity_add.AddActivity;
 import com.chesak.adam.readinglist.activity_progress.ProgressActivity;
 import com.chesak.adam.readinglist.R;
 import com.chesak.adam.readinglist.activity_rating.RatingActivity;
 import com.chesak.adam.readinglist.activity_detail.DetailActivity;
-import com.chesak.adam.readinglist.activity_finished.FinishedActivity;
 import com.chesak.adam.readinglist.activity_settings.SettingsActivity;
-import com.chesak.adam.readinglist.data.Book;
 import com.chesak.adam.readinglist.data.BookData;
 import com.chesak.adam.readinglist.data.BookList;
 import com.chesak.adam.readinglist.data.Constants;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public static String lastSearchAuthor = "";
 
     // UI elements:
-    private BookListAdapter adapter;
+    public static BookListAdapter currentAdapter;
+    public static BookListFinishedAdapter finishedAdapter;
 
 
     @Override
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ListView listView = (ListView) findViewById(R.id.list_book);
 
         if (io == null) {
             io = new IO();
@@ -70,21 +69,38 @@ public class MainActivity extends AppCompatActivity {
         // Set the action bar details
         setTitle(R.string.title_main);
 
-        // Display the book list
-        adapter = new BookListAdapter(this, bookList);
-        listView.setAdapter(adapter);
+        // Make the action bar look good with the tabs
+        try {
+            getSupportActionBar().setElevation(0);
+        } catch (NullPointerException e) {
+            // Do nothing
+        }
 
-        // Show book details on click
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Set up the tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.main_tab_current));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.main_tab_finished));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.main_pager);
+        final PagerAdapter adapter = new MainPagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
-                Book selectedBook = bookList.get(position);
-                Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
-                detailIntent.putExtra("position", position);
-                detailIntent.putExtra("book", selectedBook);
-                detailIntent.putExtra("source", Constants.SOURCE_MAIN);
-                startActivity(detailIntent);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 
@@ -102,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        adapter.notifyDataSetChanged();
+        currentAdapter.notifyDataSetChanged();
+        finishedAdapter.notifyDataSetChanged();
     }
 
 
@@ -122,10 +139,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settingsIntent);
-                return true;
-            case R.id.action_view_finished:
-                Intent finishedIntent = new Intent(MainActivity.this, FinishedActivity.class);
-                startActivity(finishedIntent);
                 return true;
             case R.id.action_view_rating:
                 Intent ratingIntent = new Intent(MainActivity.this, RatingActivity.class);

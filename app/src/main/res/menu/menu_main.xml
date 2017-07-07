@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.chesak.adam.readinglist.activity_main.MainActivity">
-    <item
-        android:id="@+id/action_view_finished"
-        android:title="@string/action_view_finished"
-        android:orderInCategory="100" />
     <item
         android:title="@string/action_view_progress"
         android:orderInCategory="101"

@@ -2,7 +2,7 @@
     <string name="app_name">Booket List</string>
 
     <!-- Activity titles -->
-    <string name="title_main">Current books</string>
+    <string name="title_main">Booket List</string>
     <string name="title_finished">Finished books</string>
     <string name="title_add">Add book</string>
     <string name="title_rating">Book ratings</string>
@@ -16,6 +16,10 @@
     <string name="action_view_rating">Book ratings</string>
     <string name="action_view_random">Random book</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Main screen -->
+    <string name="main_tab_current">Current books</string>
+    <string name="main_tab_finished">Finished books</string>
 
     <!-- Add book screen -->
     <string name="add_book_title">Title</string>
