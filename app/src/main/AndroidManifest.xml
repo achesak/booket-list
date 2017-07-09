@@ -37,11 +37,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity_add.AddActivity" />
         </activity>
-        <activity android:name=".activity_finished.FinishedActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity_main.MainActivity" />
-        </activity>
         <activity android:name=".activity_settings.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
