@@ -5,15 +5,14 @@
     <string name="title_main">Booket List</string>
     <string name="title_finished">Finished books</string>
     <string name="title_add">Add book</string>
-    <string name="title_rating">Book ratings</string>
-    <string name="title_progress">Book progress</string>
+    <string name="title_rating">View by ratings</string>
+    <string name="title_progress">View by progress</string>
     <string name="title_search">Search</string>
     <string name="title_settings">Settings and credits</string>
 
     <!-- Main screen menu -->
-    <string name="action_view_finished">Finished books</string>
-    <string name="action_view_progress">Book progress</string>
-    <string name="action_view_rating">Book ratings</string>
+    <string name="action_view_progress">View by progress</string>
+    <string name="action_view_rating">View by ratings</string>
     <string name="action_view_random">Random book</string>
     <string name="action_settings">Settings</string>
 
