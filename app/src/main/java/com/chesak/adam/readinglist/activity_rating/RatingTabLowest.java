@@ -27,9 +27,9 @@ public class RatingTabLowest extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_rating_low, container, false);
+        View view = inflater.inflate(R.layout.tab_rating, container, false);
 
-        ListView listView = (ListView) view.findViewById(R.id.listview_rating_low);
+        ListView listView = (ListView) view.findViewById(R.id.listview_rating);
 
         final BookList lowestRated = MainActivity.bookList.getLowestRated();
         final Context context = view.getContext();
