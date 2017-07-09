@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.chesak.adam.readinglist.activity_main.MainActivity;
 import com.chesak.adam.readinglist.R;
@@ -38,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Get the widgets
         final EditText pageRateText = (EditText) findViewById(R.id.settings_page_rate);
+        final ImageView pageRateButton = (ImageView) findViewById(R.id.settings_page_rate_button);
         final Switch rememberLastSearch = (Switch) findViewById(R.id.settings_search_remember);
 
         // Set the current values
@@ -47,25 +48,18 @@ public class SettingsActivity extends AppCompatActivity {
         rememberLastSearch.setChecked(MainActivity.settings.rememberLastSearch);
 
         // Update page rate
-        pageRateText.addTextChangedListener(new TextWatcher() {
+        pageRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onClick(View v) {
                 String pageRateInput = pageRateText.getText().toString();
                 if (pageRateInput.equals("")) {
                     pageRateInput = "0";
                 }
                 MainActivity.settings.pageRate = Integer.parseInt(pageRateInput);
                 MainActivity.io.saveSettings(SettingsActivity.this);
+
+                Toast toast = Toast.makeText(SettingsActivity.this, getString(R.string.settings_page_rate_toast, pageRateInput), Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -106,6 +100,9 @@ public class SettingsActivity extends AppCompatActivity {
                                                 MainActivity.bookList.clearAll();
                                                 break;
                                         }
+
+                                        Toast toast = Toast.makeText(SettingsActivity.this, R.string.settings_data_toast, Toast.LENGTH_SHORT);
+                                        toast.show();
                                     }
                                 })
                         .setNegativeButton(R.string.dialog_cancel,
