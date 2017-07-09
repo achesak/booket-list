@@ -74,6 +74,7 @@ public class SearchActivity extends AppCompatActivity {
                             nothingFound += getString(R.string.search_no_results_author, author);
                         }
                         loadingView.setText(nothingFound);
+                        loadingIndicator.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     // Nothing to do here
