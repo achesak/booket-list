@@ -8,9 +8,9 @@ Booket List can easily create and update reading lists.
 * Rate your books to remember which you liked, and sort by rating to easily find your favorites again
 * Sort by progress to decide which book to finish next
 
-![Booket List main list](screenshots/list.png "Booket List with example books")
+![Booket List main list](screenshots/list.png "Booket List with example books" =250x)
 
-![Booket List details view](screenshots/details.png "Booket List showing book details")
+![Booket List details view](screenshots/detai.lpng "Booket List showing book details" =250x)
 
 # Get Booket List
 
